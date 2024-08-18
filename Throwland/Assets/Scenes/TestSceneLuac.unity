@@ -907,7 +907,7 @@ MonoBehaviour:
   lastStartSlingSprite: {fileID: 1864101570}
   slingLine: {fileID: 223575027}
   previseLine: {fileID: 220767969}
-  previseReduction: 0
+  previseReduction: 0.75
   minForce: 5
   maxForce: 30
   minSlingDist: 0.5
