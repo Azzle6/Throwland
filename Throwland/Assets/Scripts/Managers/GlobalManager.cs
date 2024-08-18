@@ -55,7 +55,6 @@ namespace Managers
                 Debug.LogWarning($"Building with ID {buildingID} doesn't exists.");
                 return;
             }
-                
             
             Building instantiatedPrefab = Instantiate(this.AssetsReferences.ItemsReferences[buildingID]) as Building;
             if (instantiatedPrefab == null)
@@ -66,7 +65,7 @@ namespace Managers
             
             instantiatedPrefab.GetComponent<NetworkObject>().Spawn();
             instantiatedPrefab.Owner = owner;
-            instantiatedPrefab.transform.position = pos;
+            instantiatedPrefab.ChangePositionServerRpc(pos);
         }
     }
 }
