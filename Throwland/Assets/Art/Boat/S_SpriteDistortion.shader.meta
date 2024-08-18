@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: e5f3887ed6395244f9d9636f7ee776af
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _DistortTex: {fileID: 2800000, guid: 9e4cdea43bd4b4548b36509a8d8596b3, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

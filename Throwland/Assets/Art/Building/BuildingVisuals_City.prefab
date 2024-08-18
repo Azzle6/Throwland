@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2711323313872075810, guid: d7586e5d60c436c4e988aa2ba9eae874, type: 3}
       propertyPath: m_Name
-      value: BuildingVisuals_BASE
+      value: BuildingVisuals_City
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

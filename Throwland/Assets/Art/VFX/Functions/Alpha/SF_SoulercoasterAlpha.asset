@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b2425a2284af743826c689403a4924, type: 3}
+  m_Name: SF_SoulercoasterAlpha
+  m_EditorClassIdentifier: 
+  m_functionInfo: "// Made with Amplify Shader Editor\n// Available at the Unity
+    Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=18900\n1920;231;1920;1019;1968.111;440.0809;1;True;False\nNode;AmplifyShaderEditor.FunctionInput;30;-1000.499,248.5264;Inherit;False;ManualPan;1;2;False;1;0;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;41;-780.7969,509.7272;Inherit;False;Property;_Soulercoaster_InvertPanUV;Soulercoaster_InvertPanUV;3;1;[Toggle];Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.SimpleSubtractOpNode;29;-832.8,-99.77348;Inherit;False;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.TextureCoordinatesNode;28;-1382.003,-217.7736;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.FunctionInput;27;-1074.604,-157.1736;Inherit;False;UV;2;1;False;1;0;FLOAT2;0,0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.SamplerNode;1;512.3,48.29998;Inherit;True;Property;_PanningAlphaTex;PanningAlphaTex;0;1;[Header];Create;True;1;PanningAlpha;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.SimpleMultiplyOpNode;34;-643.7007,-69.0724;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;36;-447.3986,52.42766;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.RangedFloatNode;45;-70.99709,353.7276;Inherit;False;Property;_Soulercoaster_InvertUV;Soulercoaster_InvertUV;4;1;[Toggle];Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.FunctionInput;25;-1148.404,80.02657;Inherit;False;Center;2;0;False;1;0;FLOAT2;0,0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.SwizzleNode;44;-102.197,205.5277;Inherit;False;FLOAT2;1;0;2;3;1;0;FLOAT2;0,0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.DynamicAppendNode;48;-1277.111,215.9191;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.LerpOp;40;-455.7968,287.4272;Inherit;False;3;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;42;-290.6967,108.0274;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.DynamicAppendNode;39;-637.7974,342.0272;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.DynamicAppendNode;38;-641.6973,238.0274;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.SimpleAddOpNode;31;-818.4986,282.2263;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode;32;-1070.698,360.2263;Inherit;False;Property;_Soulercoaster_DebugPan;Soulercoaster_DebugPan;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.LerpOp;43;164.303,124.9276;Inherit;False;3;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.TextureTransformNode;35;-1635.201,62.52804;Inherit;False;1;False;1;0;SAMPLER2D;;False;2;FLOAT2;0;FLOAT2;1\nNode;AmplifyShaderEditor.Vector4Node;47;-1502.111,185.9191;Inherit;False;Property;_Soulercoaster_Center;Soulercoaster_Center;1;0;Create;True;0;0;0;False;0;False;0.5,0.5,0,0;0.5,0.5,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.FunctionOutput;0;928.6,50.89998;Inherit;False;True;-1;Alpha;0;False;1;0;FLOAT;0;False;1;FLOAT;0\nWireConnection;29;0;27;0\nWireConnection;29;1;25;0\nWireConnection;27;0;28;0\nWireConnection;1;1;43;0\nWireConnection;34;0;35;0\nWireConnection;34;1;29;0\nWireConnection;36;0;34;0\nWireConnection;36;1;25;0\nWireConnection;25;0;48;0\nWireConnection;44;0;42;0\nWireConnection;48;0;47;1\nWireConnection;48;1;47;2\nWireConnection;40;0;38;0\nWireConnection;40;1;39;0\nWireConnection;40;2;41;0\nWireConnection;42;0;36;0\nWireConnection;42;1;40;0\nWireConnection;39;1;31;0\nWireConnection;38;0;31;0\nWireConnection;31;0;30;0\nWireConnection;31;1;32;0\nWireConnection;43;0;42;0\nWireConnection;43;1;44;0\nWireConnection;43;2;45;0\nWireConnection;0;0;1;1\nASEEND*/\n//CHKSM=8F4C7FA3564DBA5F8F42BDEEFE2C310268781896"
+  m_functionName: 
+  m_description: 
+  m_additionalIncludes:
+    m_additionalIncludes: []
+    m_outsideIncludes: []
+  m_additionalPragmas:
+    m_additionalPragmas: []
+    m_outsidePragmas: []
+  m_additionalDirectives:
+    m_validData: 0
+    m_isDirty: 0
+    m_moduleName: ' Additional Directives'
+    m_independentModule: 1
+    m_customEdited: 0
+    m_additionalDirectives: []
+    m_shaderFunctionDirectives: []
+    m_nativeDirectives: []
+    m_nativeDirectivesIndex: -1
+    m_nativeDirectivesFoldout: 0
+    m_directivesSaveItems: []
+  m_nodeCategory: 3
+  m_customNodeCategory: 
+  m_previewPosition: 0
+  m_hidden: 0
