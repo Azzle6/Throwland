@@ -7,7 +7,7 @@ namespace Items.Throwable
         public override void OnEndThrow()
         { }
 
-        public override void OnCollide(Collider collider)
+        public override void OnCollide(Collider2D collider)
         { }
     }
 }

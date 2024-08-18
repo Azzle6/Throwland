@@ -2,8 +2,8 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Slinger : MonoBehaviour
+using Unity.Netcode;
+public class Slinger : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] Projectable ProjectablePrefab;
