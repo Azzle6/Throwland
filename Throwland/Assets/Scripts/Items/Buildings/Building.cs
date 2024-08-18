@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Managers;
+using UnityEngine;
 
 namespace Items.Buildings
 {
@@ -12,6 +13,11 @@ namespace Items.Buildings
         public override void OnHit(int damages)
         {
             Debug.Log("Get hit");
+        }
+
+        public override void OnDebugPlace(Vector3 pos, E_ItemOwner owner)
+        {
+            GlobalManager.Instance.RequestSpawnBuildingServerRpc(ID, pos, owner);
         }
     }
 
