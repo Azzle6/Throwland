@@ -15,7 +15,6 @@ namespace Items.Throwable
         public LayerMask terrainMask;
         public LayerMask collisionMask;
         public Quaternion endOrientation;
-        public GameObject endPrefab;
 
         public abstract void OnEndThrow();
 
@@ -41,7 +40,6 @@ namespace Items.Throwable
             lifeTime -= Time.deltaTime;
             if (lifeTime < 0)
             {
-                Spawn();
                 Destroy();
             }
 
@@ -56,7 +54,7 @@ namespace Items.Throwable
                 return;
             
             ChangePositionServerRpc(transform.position + (Vector3)velocity * Time.fixedDeltaTime);
-            Vector2 dragForce = 0.5f * velocity * velocity.magnitude * dragCoeff;
+            Vector2 dragForce = 0.5f * velocity * dragCoeff; // * velocity.magnitude;
             velocity += (acceleration - dragForce) * Time.fixedDeltaTime;
             acceleration = Vector3.zero;
         }
@@ -64,13 +62,7 @@ namespace Items.Throwable
         {
             acceleration += force;
         }
-        private void Spawn()
-        {
-            if (endPrefab == null) return;
-            if (Physics2D.OverlapPoint(transform.position, terrainMask) == null) 
-                return;
-            var prefabInstance = GameObject.Instantiate(endPrefab, transform.position, endOrientation);
-        }
+  
         
         private void Destroy()
         {

@@ -10,6 +10,8 @@ namespace Items.Throwable
         
         public override void OnEndThrow()
         {
+            if(BuildingToPlace == null) return;
+            if(Physics2D.OverlapPoint(transform.position,terrainMask) == null) return;
             GlobalManager.Instance.RequestSpawnBuildingServerRpc(this.BuildingToPlace.ID, transform.position, this.Owner);
         }
 
