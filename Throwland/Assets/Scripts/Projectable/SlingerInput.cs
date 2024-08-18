@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlingerInput : MonoBehaviour
+public class Slinger : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] Projectable ProjectablePrefab;
-    [SerializeField] BoxCollider2D slingZone;
 
     [Header("Visual")]
     [SerializeField] SpriteRenderer startSlingSprite;
     [SerializeField] SpriteRenderer endSlingSprite, lastStartSlingSprite;
-    [SerializeField] LineRenderer slingLine;
+    [SerializeField] LineRenderer slingLine,previseLine;
+    [SerializeField] float previseReduction;
 
     [Header("SlingParameter")]
     [SerializeField] float minForce = 5;
@@ -20,19 +20,26 @@ public class SlingerInput : MonoBehaviour
 
     [SerializeField] float minSlingDist = 0.5f;
     [SerializeField] float maxSlingDist = 3f;
+    [SerializeField] float launchYClamp = 20;
 
-    [Header("Ammunition")]
-    [SerializeField] List<Projectable> projectables;
+    [SerializeField] float endOrientationSpeed;
     //Sling Parameter
     Vector3 slingVector;
-    Vector3 startSlingPosition, endSlingPosition, lastStartSlingPosition;
-    
+    Vector3 startSlingPosition, endSlingPosition, launchPosition;
+    Quaternion endSlingRotation;
 
-    KeyCode slingInput = KeyCode.Space;
+    [Header("Ammunition")]
+    [SerializeField] List<ScriptableObject> projectablesItem;
+    int selectIndex = 0;
+
+    [Header("Input")]
+    [SerializeField] KeyCode slingInput = KeyCode.Mouse0;
+    [SerializeField] KeyCode changeItemUp = KeyCode.UpArrow;
+    [SerializeField] KeyCode selectItemDown = KeyCode.DownArrow;
+    [SerializeField] KeyCode rotateLeft = KeyCode.LeftArrow;
+    [SerializeField] KeyCode rotateRight = KeyCode.RightArrow;
+
     Camera mainCamera;
-
-    [Header("Debug")]
-    [SerializeField] SpriteRenderer debugSprite;
 
     private void Start()
     {
@@ -40,50 +47,80 @@ public class SlingerInput : MonoBehaviour
     }
     void Update()
     {
-
         UpdateSlingParameter();
-
-        if (Input.GetKeyUp(slingInput) && slingZone.OverlapPoint(startSlingPosition) && slingVector != Vector3.zero)
-            Launch();
-         UpdateSlingVisual();
-
-        // Debug
-        debugSprite.color = slingZone.OverlapPoint(mainCamera.ScreenToWorldPoint(Input.mousePosition)) ? Color.green : Color.red;
-        var color = new Color(debugSprite.color.r, debugSprite.color.g, debugSprite.color.b, 0.2f);
-        debugSprite.color = color;
-        startSlingSprite.transform.position = startSlingPosition;
+        PerformInputs();
+        UpdateSlingVisual();
     }
     void UpdateSlingParameter()
     {
-        if (Input.GetKeyUp(slingInput))
-        {
-            lastStartSlingPosition = startSlingPosition;
-            slingVector =  startSlingPosition - endSlingPosition;
-            endSlingPosition = startSlingPosition;
-        }
-
-        if (slingZone.OverlapPoint(mainCamera.ScreenToWorldPoint(Input.mousePosition)) == false) return;
+        // Get Mouse Position
         var mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
 
+        //Update launch position
+        launchPosition = startSlingPosition;
+        launchPosition.x = transform.position.x;
+        launchPosition.y = Mathf.Clamp(launchPosition.y, transform.position.y - launchYClamp * 0.5f, transform.position.y + launchYClamp * 0.5f);
+
+        //Update sling Vector + Reset endOrientation
+        if (Input.GetKeyUp(slingInput))
+        {
+            slingVector =  startSlingPosition - endSlingPosition;
+            endSlingPosition = startSlingPosition;
+            endSlingRotation = Quaternion.identity;
+        }
+
+        // Update end & start sling position
         if(Input.GetKey(slingInput) == false && Input.GetKeyUp(slingInput) == false) startSlingPosition = mousePosition;
         endSlingPosition = mousePosition;
     }
+    void PerformInputs()
+    {
+        if (Input.GetKeyUp(slingInput) && slingVector != Vector3.zero)
+            Launch();
 
+        //Update Rotation
+        var angleSpeed = 0f;
+        if (Input.GetKey(rotateLeft))
+            angleSpeed -= endOrientationSpeed * Time.deltaTime;
+        if (Input.GetKey(rotateRight))
+            angleSpeed += endOrientationSpeed * Time.deltaTime;
+        endSlingRotation *= Quaternion.Euler(Vector3.forward * angleSpeed);
+
+        //Update Select Rotation;
+        if (Input.GetKeyDown(selectItemDown))
+        {
+            selectIndex -= 1;
+            if (selectIndex < 0)
+                selectIndex = projectablesItem.Count - 1;
+        }    
+
+        if (Input.GetKeyDown(selectItemDown))
+        {
+            selectIndex += 1;
+            selectIndex %= projectablesItem.Count;
+        }
+    }
     void UpdateSlingVisual()
     {
         startSlingSprite.transform.position = startSlingPosition;
         endSlingSprite.transform.position = endSlingPosition;
-        lastStartSlingSprite.transform.position = lastStartSlingPosition;
+        lastStartSlingSprite.transform.position = launchPosition;
 
         slingLine.SetPosition(0, startSlingPosition);
         slingLine.SetPosition(1, endSlingPosition);
+
+        previseLine.SetPosition(0,launchPosition);
+        var previseVector = ( startSlingPosition - endSlingPosition);
+        float slingForceFactor = (previseVector.magnitude - minSlingDist) / (maxSlingDist - minSlingDist);
+        float slingForce = Mathf.Lerp(minForce, maxForce, slingForceFactor);
+        previseLine.SetPosition(1, launchPosition + previseVector.normalized * slingForce * previseReduction);
     }
 
 
     void Launch()
     {
-        var projectable = Instantiate(ProjectablePrefab, startSlingSprite.transform.position, transform.rotation);
+        var projectable = Instantiate(ProjectablePrefab, launchPosition, transform.rotation);
 
         Vector3 slingDir = slingVector.normalized;
         float slingForceFactor = (slingVector.magnitude-minSlingDist)/(maxSlingDist-minSlingDist);
