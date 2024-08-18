@@ -11,7 +11,7 @@
             throw new System.NotImplementedException();
         }
 
-        public override void OnCollide(Collider col)
+        public override void OnCollide(Collider2D col)
         {
             throw new System.NotImplementedException();
         }
