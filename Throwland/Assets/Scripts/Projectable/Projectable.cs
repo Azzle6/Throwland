@@ -7,14 +7,18 @@ public class Projectable : MonoBehaviour
     public Vector3 velocity;
     public Vector3 acceleration; // Gravity as an example
     public float lifeTime;
-
+    public LayerMask terrainMask;
     public Quaternion endOrientation;
     public GameObject endPrefab;
     private void Update()
     {
         lifeTime -= Time.deltaTime;
-        if (lifeTime < 0 )
+        if (lifeTime < 0)
+        {
+            Spawn();
             Destroy();
+        }
+            
     }
     public void FixedUpdate()
     {
@@ -29,13 +33,12 @@ public class Projectable : MonoBehaviour
     }
     public void AddForce(Vector3 force)
     {
-      
         acceleration += force;
     }
     private void Spawn()
     {
         if (endPrefab == null) return;
-        if (!Physics2D.OverlapPoint(transform.position,7)) return;
+        if (Physics2D.OverlapPoint(transform.position,terrainMask) == null) return;
         var prefabInstance = GameObject.Instantiate(endPrefab,transform.position, endOrientation);
     }
     private void Destroy()

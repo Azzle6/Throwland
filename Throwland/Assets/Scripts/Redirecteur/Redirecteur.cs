@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Redirecteur;
 
 public class Redirecteur : MonoBehaviour
 {
@@ -8,12 +9,20 @@ public class Redirecteur : MonoBehaviour
     [SerializeField] SpriteRenderer influenceCircle;
 
     [Header("Parameters")]
+    [SerializeField] float lifeTime;
     [SerializeField] float radius;
     [SerializeField] LayerMask collisionMask;
     public enum RedirectType { ATTRACT,REPULSE,ORIENT,ACCEL,SLOW}
     [SerializeField] RedirectType redirectType;
     [SerializeField] float force;
-
+    private void Update()
+    {
+        lifeTime -= Time.deltaTime;
+        if (lifeTime < 0)
+        {
+            Destroy(gameObject);
+        }
+    }
     private void FixedUpdate()
     {
         influenceCircle.transform.localScale = Vector3.one * radius * 2;
@@ -55,7 +64,13 @@ public class Redirecteur : MonoBehaviour
 
             }
             Vector3 force = dir * this.force;
-            projectable.AddForce(force);
+            if (redirectType != RedirectType.ORIENT)
+                projectable.AddForce(force);
+            else
+            {
+                var length = projectable.velocity.magnitude;
+                projectable.velocity = length * dir;
+            }
         }
             
     }
