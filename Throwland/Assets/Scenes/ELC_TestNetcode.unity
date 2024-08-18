@@ -598,6 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b6c4661469c974eb52b372e98d43a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectedBuilding: 
   DebugButtonsParent: {fileID: 1278375367}
   ButtonTemplate: {fileID: 5947854927713298333, guid: ab69154698b128149b8f050426502dca, type: 3}
 --- !u!1 &744646864
@@ -987,6 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AssetsReferences: {fileID: 11400000, guid: a57f09798a98ffe4f86fb7ddca6ba9ca, type: 2}
+  UIManager: {fileID: 0}
 --- !u!114 &885980793
 MonoBehaviour:
   m_ObjectHideFlags: 0

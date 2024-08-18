@@ -26,6 +26,7 @@ namespace Items.Buildings
         CITY,
         SERVICE,
         OBSTACLE,
-        RESOURCE_SOURCE
+        RESOURCE_SOURCE,
+        REDIRECTOR
     }
 }
