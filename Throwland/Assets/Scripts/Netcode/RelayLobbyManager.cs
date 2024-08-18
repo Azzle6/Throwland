@@ -35,6 +35,8 @@ namespace Netcode
             
             string joinCode = await this.StartHost();
             joinCodeText.text = joinCode;
+            GUIUtility.systemCopyBuffer = joinCode;
+
         }
 
         public async void JoinRelay()
