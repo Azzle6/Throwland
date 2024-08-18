@@ -11,6 +11,7 @@ namespace Items.Throwable
         public Vector2 velocity;
         public Vector2 acceleration; // Gravity as an example
         public float lifeTime;
+        public float dragCoeff;
         public LayerMask terrainMask;
         public LayerMask collisionMask;
         public Quaternion endOrientation;
@@ -25,7 +26,7 @@ namespace Items.Throwable
             Debug.Log("Hit a throwable");
         }
 
-        public void Throw(Vector2 startPosition, Vector2 dir, Vector2 strength)
+        public void Throw(Vector2 startPosition, Vector2 dir, float strength)
         {
             ChangePositionServerRpc(startPosition);
             velocity = dir * strength;
@@ -55,7 +56,8 @@ namespace Items.Throwable
                 return;
             
             ChangePositionServerRpc(transform.position + (Vector3)velocity * Time.fixedDeltaTime);
-            velocity += acceleration * Time.fixedDeltaTime;
+            Vector2 dragForce = 0.5f * velocity * velocity.magnitude * dragCoeff;
+            velocity += (acceleration - dragForce) * Time.fixedDeltaTime;
             acceleration = Vector3.zero;
         }
         public void AddForce(Vector2 force)
