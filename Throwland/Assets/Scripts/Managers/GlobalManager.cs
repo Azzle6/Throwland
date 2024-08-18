@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Threading.Tasks;
 using Items;
 using Items.Buildings;
 using Items.Throwable;
@@ -16,6 +19,8 @@ namespace Managers
         public UIManager UIManager;
         public Transform FirstSlingerSpawn;
         public Transform SecondSlingerSpawn;
+
+        public Action Tick;
         
         public E_ItemOwner ClientTeam;
 
@@ -27,6 +32,19 @@ namespace Managers
                 Destroy(this);
         }
 
+        public override void OnNetworkSpawn()
+        {
+            if(IsHost)
+                this.Ticker();
+        }
+
+        private async void Ticker()
+        {
+            await Task.Delay(1000);
+            this.CallTickServerRpc();
+            this.Ticker();
+        }
+            
         [ServerRpc(RequireOwnership = false)]
         public void RequestThrowObjectServerRpc(string throwableID, Vector2 pos, Vector2 dir, float strength, E_ItemOwner owner)
         {
@@ -66,6 +84,18 @@ namespace Managers
             instantiatedPrefab.GetComponent<NetworkObject>().Spawn();
             instantiatedPrefab.Owner = owner;
             instantiatedPrefab.ChangePositionServerRpc(pos);
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void CallTickServerRpc()
+        {
+            this.CallTickClientRpc();
+        }
+
+        [ClientRpc]
+        private void CallTickClientRpc()
+        {
+            this.Tick?.Invoke();
         }
     }
 }

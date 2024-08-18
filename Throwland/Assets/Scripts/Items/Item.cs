@@ -9,7 +9,7 @@ namespace Items
     {
         public string ID => name;
         public E_ItemOwner Owner;
-        public int HP;
+        public NetworkVariable<int> HP;
         public abstract void OnHit(int damages);
 
         [ServerRpc(RequireOwnership = false)]
@@ -31,6 +31,13 @@ namespace Items
         {
             transform.position = pos;
         }
+
+        [ServerRpc]
+        public void ChangeHpServerRpc(int newHp)
+        {
+            this.HP.Value = newHp;
+        }
+        
     }
 
     public enum E_ItemOwner
