@@ -13,7 +13,7 @@ namespace Items.Throwable
             GlobalManager.Instance.RequestSpawnBuildingServerRpc(this.BuildingToPlace.ID, transform.position, this.Owner);
         }
 
-        public override void OnCollide(Collider collider)
+        public override void OnCollide(Collider2D collider)
         {
         }
     }

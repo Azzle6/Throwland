@@ -1,5 +1,4 @@
-﻿using Managers;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Items.Buildings
 {
@@ -14,11 +13,6 @@ namespace Items.Buildings
         {
             Debug.Log("Get hit");
         }
-
-        public override void OnDebugPlace(Vector3 pos, E_ItemOwner owner)
-        {
-            GlobalManager.Instance.RequestSpawnBuildingServerRpc(ID, pos, owner);
-        }
     }
 
     public enum E_BuildingType
@@ -26,6 +20,7 @@ namespace Items.Buildings
         CITY,
         SERVICE,
         OBSTACLE,
-        RESOURCE_SOURCE
+        RESOURCE_SOURCE,
+        REDIRECTOR
     }
 }

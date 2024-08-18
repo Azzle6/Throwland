@@ -7,11 +7,6 @@ namespace Resources
     public class ResourcesManager
     {
         public Dictionary<E_ItemOwner, ResourcesStocks> ResourcesStocks;
-
-        public void AddResource(E_ItemOwner player, E_ResourceType resourceType, int quantity)
-        {
-            
-        }
     }
 
     [Serializable]

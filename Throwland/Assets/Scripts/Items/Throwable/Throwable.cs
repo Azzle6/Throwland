@@ -1,5 +1,4 @@
 ﻿using System;
-using Managers;
 
 namespace Items.Throwable
 {
@@ -8,47 +7,73 @@ namespace Items.Throwable
     [Serializable]
     public abstract class Throwable : Item
     {
-        [SerializeField] 
-        private float weight;
-        
-        private Vector2 curDirection;
-        private float curVelocity;
-        private bool isThrowing;
-        
+        public float radius;
+        public Vector2 velocity;
+        public Vector2 acceleration; // Gravity as an example
+        public float lifeTime;
+        public LayerMask terrainMask;
+        public LayerMask collisionMask;
+        public Quaternion endOrientation;
+        public GameObject endPrefab;
+
         public abstract void OnEndThrow();
 
-        public abstract void OnCollide(Collider col);
+        public abstract void OnCollide(Collider2D col);
 
         public override void OnHit(int damages)
         {
             Debug.Log("Hit a throwable");
         }
 
-        public void Throw(Vector2 startPosition, Vector2 dir, float strength)
+        public void Throw(Vector2 startPosition, Vector2 dir, Vector2 strength)
         {
-            transform.position = startPosition;
-            this.curDirection = dir;
-            this.curVelocity = strength;
-            this.isThrowing = true;
-        }
-        
-        public override void OnDebugPlace(Vector3 pos, E_ItemOwner owner)
-        {
-            GlobalManager.Instance.RequestThrowObjectServerRpc(ID, pos, Vector2.up, 1f, this.Owner);
+            ChangePositionServerRpc(startPosition);
+            velocity = dir * strength;
+            acceleration = Vector2.zero;
         }
 
         private void Update()
         {
-            if (this.curVelocity > 0)
+            if(!IsOwner)
+                return;
+            
+            lifeTime -= Time.deltaTime;
+            if (lifeTime < 0)
             {
-                transform.position += (Vector3)this.curDirection * (this.curVelocity * Time.deltaTime);
-                this.curVelocity -= Time.deltaTime * this.weight;
+                Spawn();
+                Destroy();
             }
-            else if (this.isThrowing)
-            {
-                this.OnEndThrow();
-                Destroy(this.gameObject);
-            }
+
+            var hit = Physics2D.OverlapCircle(transform.position, radius, collisionMask);
+            if (hit != null)
+                OnCollide(hit);
+        }
+
+        private void FixedUpdate()
+        {
+            if(!IsOwner)
+                return;
+            
+            ChangePositionServerRpc(transform.position + (Vector3)velocity * Time.fixedDeltaTime);
+            velocity += acceleration * Time.fixedDeltaTime;
+            acceleration = Vector3.zero;
+        }
+        public void AddForce(Vector2 force)
+        {
+            acceleration += force;
+        }
+        private void Spawn()
+        {
+            if (endPrefab == null) return;
+            if (Physics2D.OverlapPoint(transform.position, terrainMask) == null) 
+                return;
+            var prefabInstance = GameObject.Instantiate(endPrefab, transform.position, endOrientation);
+        }
+        
+        private void Destroy()
+        {
+            OnEndThrow();
+            this.DeleteItemServerRpc();
         }
     }
 }
