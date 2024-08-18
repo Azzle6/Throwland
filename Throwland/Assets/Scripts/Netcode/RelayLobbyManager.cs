@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using Items;
+using Managers;
 using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -32,17 +34,19 @@ namespace Netcode
         public async void StartRelayHost()
         {
             await this.TryDisconnect();
-            
+            GlobalManager.Instance.ClientTeam = E_ItemOwner.PLAYER_1;
             string joinCode = await this.StartHost();
             joinCodeText.text = joinCode;
             GUIUtility.systemCopyBuffer = joinCode;
-
+            
         }
 
         public async void JoinRelay()
         {
             await this.TryDisconnect();
+            GlobalManager.Instance.ClientTeam = E_ItemOwner.PLAYER_2;
             await this.StartClient(this.codeInputField.text);
+            
         }
 
         private async Task TryDisconnect()

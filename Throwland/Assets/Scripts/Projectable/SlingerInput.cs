@@ -1,13 +1,10 @@
-using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
+using Items;
+using Managers;
 using UnityEngine;
 using Unity.Netcode;
 public class Slinger : NetworkBehaviour
 {
-    [Header("References")]
-    [SerializeField] Projectable ProjectablePrefab;
-
     [Header("Visual")]
     [SerializeField] SpriteRenderer startSlingSprite;
     [SerializeField] SpriteRenderer endSlingSprite, lastStartSlingSprite;
@@ -40,13 +37,43 @@ public class Slinger : NetworkBehaviour
     [SerializeField] KeyCode rotateRight = KeyCode.RightArrow;
 
     Camera mainCamera;
+    
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            Debug.Log(GlobalManager.Instance.ClientTeam);
+            Vector3 newPos = GlobalManager.Instance.ClientTeam == E_ItemOwner.PLAYER_1
+                ? GlobalManager.Instance.FirstSlingerSpawn.position
+                : GlobalManager.Instance.SecondSlingerSpawn.position;
+            
+            ChangePositionServerRpc(newPos);
+        }
+    }
 
+    [ServerRpc]
+    private void ChangePositionServerRpc(Vector3 pos)
+    {
+        transform.position = pos;
+        ChangePositionClientRpc(pos);
+    }
+
+    [ClientRpc]
+    private void ChangePositionClientRpc(Vector3 pos)
+    {
+        transform.position = pos;
+    }
+    
     private void Start()
     {
         mainCamera = Camera.main;
     }
+    
     void Update()
     {
+        if (!IsOwner)
+            return;
+        
         UpdateSlingParameter();
         PerformInputs();
         UpdateSlingVisual();
@@ -120,13 +147,10 @@ public class Slinger : NetworkBehaviour
 
     void Launch()
     {
-        var projectable = Instantiate(ProjectablePrefab, launchPosition, transform.rotation);
-
         Vector3 slingDir = slingVector.normalized;
         float slingForceFactor = (slingVector.magnitude-minSlingDist)/(maxSlingDist-minSlingDist);
         float slingForce = Mathf.Lerp(minForce, maxForce, slingForceFactor);
-        projectable.velocity = slingDir * slingForce;
-        //projectable.Init(startSlingPosition, 3f, slingForce * slingDir);
+        GlobalManager.Instance.RequestThrowObjectServerRpc(GlobalManager.Instance.UIManager.SelectedBuilding, this.launchPosition, slingVector.normalized, slingDir * slingForce, GlobalManager.Instance.ClientTeam);
     }
 
     private void OnDrawGizmos()

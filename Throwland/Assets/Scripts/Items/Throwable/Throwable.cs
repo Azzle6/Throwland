@@ -1,5 +1,4 @@
 ﻿using System;
-using Managers;
 
 namespace Items.Throwable
 {
@@ -26,20 +25,18 @@ namespace Items.Throwable
             Debug.Log("Hit a throwable");
         }
 
-        public void Throw(Vector2 startPosition, Vector2 dir, float strength)
+        public void Throw(Vector2 startPosition, Vector2 dir, Vector2 strength)
         {
-            transform.position = startPosition;
+            ChangePositionServerRpc(startPosition);
             velocity = dir * strength;
             acceleration = Vector2.zero;
-        }
-        
-        public override void OnDebugPlace(Vector3 pos, E_ItemOwner owner)
-        {
-            GlobalManager.Instance.RequestThrowObjectServerRpc(ID, pos, Vector2.up, 1f, this.Owner);
         }
 
         private void Update()
         {
+            if(!IsOwner)
+                return;
+            
             lifeTime -= Time.deltaTime;
             if (lifeTime < 0)
             {
@@ -54,7 +51,10 @@ namespace Items.Throwable
 
         private void FixedUpdate()
         {
-            transform.position += (Vector3)velocity * Time.fixedDeltaTime;
+            if(!IsOwner)
+                return;
+            
+            ChangePositionServerRpc(transform.position + (Vector3)velocity * Time.fixedDeltaTime);
             velocity += acceleration * Time.fixedDeltaTime;
             acceleration = Vector3.zero;
         }
@@ -65,13 +65,15 @@ namespace Items.Throwable
         private void Spawn()
         {
             if (endPrefab == null) return;
-            if (Physics2D.OverlapPoint(transform.position, terrainMask) == null) return;
+            if (Physics2D.OverlapPoint(transform.position, terrainMask) == null) 
+                return;
             var prefabInstance = GameObject.Instantiate(endPrefab, transform.position, endOrientation);
         }
+        
         private void Destroy()
         {
             OnEndThrow();
-            Destroy(gameObject); //TODO : Pooler
+            this.DeleteItemServerRpc();
         }
     }
 }

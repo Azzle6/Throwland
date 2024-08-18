@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4414294763504184695}
   - component: {fileID: 1668547243003732036}
   - component: {fileID: 2744485547192921520}
-  - component: {fileID: 9153225147231138675}
   m_Layer: 0
   m_Name: ThrowableCity
   m_TagString: Untagged
@@ -48,7 +47,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Owner: 0
   HP: 5
-  weight: 2
+  radius: 0
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  lifeTime: 0
+  terrainMask:
+    serializedVersion: 2
+    m_Bits: 0
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  endOrientation: {x: 0, y: 0, z: 0, w: 0}
+  endPrefab: {fileID: 0}
   BuildingToPlace: {fileID: 7773582300508424616, guid: a3bf4e6f67a3d354e9c188f96a18b08e, type: 3}
 --- !u!114 &2744485547192921520
 MonoBehaviour:
@@ -70,33 +80,3 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &9153225147231138675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630902707383446515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  UseQuaternionSynchronization: 0
-  UseQuaternionCompression: 0
-  UseHalfFloatPrecision: 0
-  InLocalSpace: 0
-  Interpolate: 1
-  SlerpPosition: 0

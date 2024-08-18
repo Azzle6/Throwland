@@ -1,14 +1,13 @@
 using Managers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using Button = UnityEngine.UI.Button;
 
 public class UIManager : MonoBehaviour
 {
     public string SelectedBuilding;
     public GameObject DebugButtonsParent;
     public Button ButtonTemplate;
-
     private void Start()
     {
         foreach (var itemsReference in GlobalManager.Instance.AssetsReferences.ItemsReferences)

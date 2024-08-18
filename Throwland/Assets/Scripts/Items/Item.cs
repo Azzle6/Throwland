@@ -12,7 +12,25 @@ namespace Items
         public int HP;
         public abstract void OnHit(int damages);
 
-        public abstract void OnDebugPlace(Vector3 pos, E_ItemOwner owner);
+        [ServerRpc(RequireOwnership = false)]
+        public void DeleteItemServerRpc()
+        {
+            this.GetComponent<NetworkObject>().Despawn();
+            base.OnNetworkDespawn();
+        }
+        
+        [ServerRpc(RequireOwnership = false)]
+        public void ChangePositionServerRpc(Vector3 pos)
+        {
+            transform.position = pos;
+            ChangePositionClientRpc(pos);
+        }
+
+        [ClientRpc]
+        private void ChangePositionClientRpc(Vector3 pos)
+        {
+            transform.position = pos;
+        }
     }
 
     public enum E_ItemOwner
