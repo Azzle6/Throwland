@@ -147,10 +147,10 @@ public class Slinger : NetworkBehaviour
 
     void Launch()
     {
-        Vector3 slingDir = slingVector.normalized;
+        //Vector3 slingDir = (startSlingPosition - endSlingPosition).normalized;
         float slingForceFactor = (slingVector.magnitude-minSlingDist)/(maxSlingDist-minSlingDist);
         float slingForce = Mathf.Lerp(minForce, maxForce, slingForceFactor);
-        GlobalManager.Instance.RequestThrowObjectServerRpc(GlobalManager.Instance.UIManager.SelectedBuilding, this.launchPosition, slingVector.normalized, slingDir * slingForce, GlobalManager.Instance.ClientTeam);
+        GlobalManager.Instance.RequestThrowObjectServerRpc(GlobalManager.Instance.UIManager.SelectedBuilding, this.launchPosition, slingVector.normalized, slingForce, GlobalManager.Instance.ClientTeam);
     }
 
     private void OnDrawGizmos()

@@ -28,7 +28,7 @@ namespace Managers
         }
 
         [ServerRpc(RequireOwnership = false)]
-        public void RequestThrowObjectServerRpc(string throwableID, Vector2 pos, Vector2 dir, Vector2 velocity, E_ItemOwner owner)
+        public void RequestThrowObjectServerRpc(string throwableID, Vector2 pos, Vector2 dir, float strength, E_ItemOwner owner)
         {
             if (throwableID == null || !this.AssetsReferences.ItemsReferences.ContainsKey(throwableID))
             {
@@ -44,7 +44,7 @@ namespace Managers
             }
             instantiatedPrefab.GetComponent<NetworkObject>().Spawn();
             instantiatedPrefab.Owner = owner;
-            instantiatedPrefab.Throw(pos, dir, velocity);
+            instantiatedPrefab.Throw(pos, dir, strength);
         }
 
         [ServerRpc(RequireOwnership = false)]
