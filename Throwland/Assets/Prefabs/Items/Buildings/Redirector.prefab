@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 7001799106412903426}
   - component: {fileID: -8839500092191112841}
   m_Layer: 0
-  m_Name: Redirecteur
+  m_Name: Redirector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

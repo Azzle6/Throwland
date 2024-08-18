@@ -20,6 +20,12 @@ namespace Resources
     {
         public E_ResourceType ResourceType;
         public int Quantity;
+
+        public ResourceQuantity(E_ResourceType resourceType, int quantity)
+        {
+            ResourceType = resourceType;
+            Quantity = quantity;
+        }
     }
 
     public enum E_ResourceType

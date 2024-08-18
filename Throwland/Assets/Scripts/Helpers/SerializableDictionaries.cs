@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Items;
+using Resources;
 using UnityEngine;
 
 namespace Helpers
@@ -38,4 +39,7 @@ namespace Helpers
     [Serializable]
     public class ItemsReferencesDictionary : SerializedDictionary<string, Item>
     {}
+    [Serializable]
+    public class RessourceIconDictionary : SerializedDictionary<E_ResourceType, Sprite>
+    { }
 }
