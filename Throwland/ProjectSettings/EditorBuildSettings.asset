@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ELC_TestNetcode.unity
+    guid: 31b2e02377e36404984e162055f23bd7
   m_configObjects: {}
