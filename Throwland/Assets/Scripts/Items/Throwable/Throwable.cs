@@ -1,4 +1,5 @@
 ﻿using System;
+using Managers;
 
 namespace Items.Throwable
 {
@@ -29,6 +30,11 @@ namespace Items.Throwable
             this.curDirection = dir;
             this.curVelocity = strength;
             this.isThrowing = true;
+        }
+        
+        public override void OnDebugPlace(Vector3 pos, E_ItemOwner owner)
+        {
+            GlobalManager.Instance.RequestThrowObjectServerRpc(ID, pos, Vector2.up, 1f, this.Owner);
         }
 
         private void Update()

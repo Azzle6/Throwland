@@ -10,7 +10,7 @@ namespace Items.Throwable
         
         public override void OnEndThrow()
         {
-            GlobalManager.Instance.RequestSpawnBuildingServerRpc(this.BuildingToPlace.ID, transform.position);
+            GlobalManager.Instance.RequestSpawnBuildingServerRpc(this.BuildingToPlace.ID, transform.position, this.Owner);
         }
 
         public override void OnCollide(Collider collider)

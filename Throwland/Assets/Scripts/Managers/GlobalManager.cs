@@ -12,6 +12,7 @@ namespace Managers
     {
         public static GlobalManager Instance;
         public AssetsReferencesListSO AssetsReferences;
+        public UIManager UIManager;
 
         public Dictionary<E_ItemOwner, NetworkClient> OwnerToClient;
 
@@ -33,10 +34,11 @@ namespace Managers
         }
 
         [ServerRpc(RequireOwnership = false)]
-        public void RequestSpawnBuildingServerRpc(string buildingID, Vector2 pos)
+        public void RequestSpawnBuildingServerRpc(string buildingID, Vector2 pos, E_ItemOwner owner)
         {
             Building instantiatedPrefab = (Building)Instantiate(this.AssetsReferences.ItemsReferences[buildingID]);
             instantiatedPrefab.GetComponent<NetworkObject>().Spawn();
+            instantiatedPrefab.Owner = owner;
             instantiatedPrefab.transform.position = pos;
         }
     }

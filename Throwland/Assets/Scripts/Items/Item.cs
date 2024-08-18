@@ -1,5 +1,6 @@
 using System;
 using Unity.Netcode;
+using UnityEngine;
 
 namespace Items
 {
@@ -10,6 +11,8 @@ namespace Items
         public E_ItemOwner Owner;
         public int HP;
         public abstract void OnHit(int damages);
+
+        public abstract void OnDebugPlace(Vector3 pos, E_ItemOwner owner);
     }
 
     public enum E_ItemOwner

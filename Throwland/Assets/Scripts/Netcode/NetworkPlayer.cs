@@ -51,13 +51,14 @@ namespace Netcode
 
             if (Input.GetMouseButtonDown(0) && IsOwner)
             {
-                this.ThrowCity();
-            }
-        }
+                /*RaycastHit2D raycastHit =
+                    Physics2D.Raycast(Camera.current.ScreenToWorldPoint(Input.mousePosition), Vector2.one * 15f);
 
-        private void ThrowCity()
-        {
-            GlobalManager.Instance.RequestThrowObjectServerRpc(GlobalManager.Instance.AssetsReferences.ItemsReferences["ThrowableCity"].ID, Vector2.one * Random.Range(-5f, 5f), (Vector2.one * Random.Range(-1f, 1f)).normalized, 0, this.playerType.Value);
+                if (raycastHit.collider != null)
+                {
+                    GlobalManager.Instance.AssetsReferences.ItemsReferences[GlobalManager.Instance.UIManager.SelectedBuilding].OnDebugPlace(raycastHit.point, this.playerType.Value);
+                }*/
+            }
         }
     }
 }
