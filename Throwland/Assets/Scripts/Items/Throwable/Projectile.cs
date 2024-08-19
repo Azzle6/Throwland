@@ -6,7 +6,7 @@
     {
         public int Damage;
         
-        public override void OnEndThrow()
+        public override void OnEndThrowServer()
         {
             throw new System.NotImplementedException();
         }

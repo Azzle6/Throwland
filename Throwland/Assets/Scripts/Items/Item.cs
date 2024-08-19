@@ -19,18 +19,18 @@ namespace Items
             base.OnNetworkDespawn();
         }
         
-        [ServerRpc(RequireOwnership = false)]
-        public void ChangePositionServerRpc(Vector3 pos)
-        {
-            transform.position = pos;
-            ChangePositionClientRpc(pos);
-        }
+        //[ServerRpc(RequireOwnership = false)]
+        //public void ChangePositionServerRpc(Vector3 pos)
+        //{
+        //    transform.position = pos;
+        //    ChangePositionClientRpc(pos);
+        //}
 
-        [ClientRpc]
-        private void ChangePositionClientRpc(Vector3 pos)
-        {
-            transform.position = pos;
-        }
+        //[ClientRpc]
+        //private void ChangePositionClientRpc(Vector3 pos)
+        //{
+        //    transform.position = pos;
+        //}
 
         [ServerRpc]
         public void ChangeHpServerRpc(int newHp)

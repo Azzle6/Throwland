@@ -62,7 +62,7 @@ namespace Managers
             }
             instantiatedPrefab.GetComponent<NetworkObject>().Spawn();
             instantiatedPrefab.Owner = owner;
-            instantiatedPrefab.Throw(pos, dir, strength);
+            instantiatedPrefab.ThrowServer(pos, dir, strength);
         }
 
         [ServerRpc(RequireOwnership = false)]
@@ -74,7 +74,7 @@ namespace Managers
                 return;
             }
             
-            Building instantiatedPrefab = Instantiate(this.AssetsReferences.ItemsReferences[buildingID]) as Building;
+            Building instantiatedPrefab = Instantiate(this.AssetsReferences.ItemsReferences[buildingID], pos, Quaternion.identity) as Building;
             if (instantiatedPrefab == null)
             {
                 Debug.LogWarning($"Item with ID {buildingID} isn't a building.");
@@ -83,7 +83,6 @@ namespace Managers
             
             instantiatedPrefab.GetComponent<NetworkObject>().Spawn();
             instantiatedPrefab.Owner = owner;
-            instantiatedPrefab.ChangePositionServerRpc(pos);
         }
 
         [ServerRpc(RequireOwnership = false)]

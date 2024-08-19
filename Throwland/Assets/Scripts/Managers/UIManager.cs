@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
             string id = itemsReference.Key;
             button.GetComponentInChildren<TMP_Text>().text = id;
             button.onClick.AddListener(() => SetSelectedBuilding(id));
+            SelectedBuilding = id;
         }
     }
 

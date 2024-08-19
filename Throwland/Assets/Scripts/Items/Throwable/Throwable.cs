@@ -16,7 +16,7 @@ namespace Items.Throwable
         public LayerMask collisionMask;
         public Quaternion endOrientation;
 
-        public abstract void OnEndThrow();
+        public abstract void OnEndThrowServer();
 
         public abstract void OnCollide(Collider2D col);
 
@@ -25,9 +25,9 @@ namespace Items.Throwable
             Debug.Log("Hit a throwable");
         }
 
-        public void Throw(Vector2 startPosition, Vector2 dir, float strength)
+        public void ThrowServer(Vector2 startPosition, Vector2 dir, float strength)
         {
-            ChangePositionServerRpc(startPosition);
+            transform.position = (startPosition);
             velocity = dir * strength;
             acceleration = Vector2.zero;
         }
@@ -53,7 +53,7 @@ namespace Items.Throwable
             if(!IsOwner)
                 return;
             
-            ChangePositionServerRpc(transform.position + (Vector3)velocity * Time.fixedDeltaTime);
+            transform.position += (Vector3)velocity * Time.fixedDeltaTime;
             Vector2 dragForce = 0.5f * velocity * dragCoeff; // * velocity.magnitude;
             velocity += (acceleration - dragForce) * Time.fixedDeltaTime;
             acceleration = Vector3.zero;
@@ -66,7 +66,7 @@ namespace Items.Throwable
         
         private void Destroy()
         {
-            OnEndThrow();
+            OnEndThrowServer();
             this.DeleteItemServerRpc();
         }
     }

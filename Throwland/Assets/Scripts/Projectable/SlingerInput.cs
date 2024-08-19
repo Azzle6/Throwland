@@ -104,7 +104,7 @@ public class Slinger : NetworkBehaviour
     void PerformInputs()
     {
         if (Input.GetKeyUp(slingInput) && slingVector != Vector3.zero)
-            Launch();
+            ThrowLocal();
 
         //Update Rotation
         var angleSpeed = 0f;
@@ -145,7 +145,7 @@ public class Slinger : NetworkBehaviour
     }
 
 
-    void Launch()
+    void ThrowLocal()
     {
         //Vector3 slingDir = (startSlingPosition - endSlingPosition).normalized;
         float slingForceFactor = (slingVector.magnitude-minSlingDist)/(maxSlingDist-minSlingDist);
