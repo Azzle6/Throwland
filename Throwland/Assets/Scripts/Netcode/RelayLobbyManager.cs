@@ -46,7 +46,7 @@ namespace Netcode
             await this.TryDisconnect();
             GlobalManager.Instance.ClientTeam = E_ItemOwner.PLAYER_2;
             await this.StartClient(this.codeInputField.text);
-            
+            joinCodeText.text = this.codeInputField.text;
         }
 
         private async Task TryDisconnect()
