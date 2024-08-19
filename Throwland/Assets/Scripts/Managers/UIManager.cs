@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public Button ButtonTemplate;
     private void Start()
     {
-        foreach (var itemsReference in GlobalManager.Instance.AssetsReferences.ItemsReferences)
+        foreach (var itemsReference in GlobalManager.Instance.AssetsReferences.ThrowableReferences)
         {
             Button button = Instantiate(this.ButtonTemplate, this.DebugButtonsParent.transform);
             string id = itemsReference.Key;

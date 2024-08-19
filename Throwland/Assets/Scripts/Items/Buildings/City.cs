@@ -19,12 +19,18 @@ namespace Items.Buildings
         public override void OnNetworkSpawn()
         {
             this.HP.OnValueChanged += OnHPChanged;
-            SetTeamServerRpc(Owner);
+            this.Owner.OnValueChanged += OnOwnerChanged;
             
             if(!IsHost)
                 return;
             
             GlobalManager.Instance.Tick += this.TryGrowth;
+        }
+
+        private void OnOwnerChanged(E_ItemOwner previousvalue, E_ItemOwner newvalue)
+        {
+            Debug.Log($"Change city owner to {newvalue}.");
+            this.cityVisuals.SetTeamIndex((int)Owner.Value);
         }
 
         private void OnHPChanged(int previousvalue, int newvalue)
@@ -42,12 +48,6 @@ namespace Items.Buildings
                 this.ChangeHpServerRpc(this.HP.Value + 1);
                 this.tickGrowthCount = 0;
             }
-        }
-
-        [ServerRpc(RequireOwnership = false)]
-        private void SetTeamServerRpc(E_ItemOwner owner)
-        {
-            this.cityVisuals.SetTeamIndex((int)owner);
         }
     }
 }

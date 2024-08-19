@@ -8,7 +8,7 @@ namespace Items
     public abstract class Item : NetworkBehaviour
     {
         public string ID => name;
-        public E_ItemOwner Owner;
+        public NetworkVariable<E_ItemOwner> Owner;
         public NetworkVariable<int> HP;
         public abstract void OnHit(int damages);
 
@@ -17,6 +17,12 @@ namespace Items
         {
             this.GetComponent<NetworkObject>().Despawn();
             base.OnNetworkDespawn();
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void SetOwnerServerRpc(E_ItemOwner owner)
+        {
+            Owner.Value = owner;
         }
         
         //[ServerRpc(RequireOwnership = false)]

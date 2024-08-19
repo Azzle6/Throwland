@@ -7,5 +7,7 @@ namespace Prefabs.Items
     public class AssetsReferencesListSO : ScriptableObject
     {
         public ItemsReferencesDictionary ItemsReferences;
+        
+        public ItemsReferencesDictionary ThrowableReferences;
     }
 }

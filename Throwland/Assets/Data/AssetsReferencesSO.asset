@@ -16,6 +16,17 @@ MonoBehaviour:
     keyData:
     - City
     - ThrowableCity
+    - ThrowableRedirector
+    - Redirector
     valueData:
     - {fileID: 7773582300508424616, guid: a3bf4e6f67a3d354e9c188f96a18b08e, type: 3}
     - {fileID: 1668547243003732036, guid: 055dad3c690e16f48b24593521895851, type: 3}
+    - {fileID: 1668547243003732036, guid: 5a0db77f24c9281408b50363d76f6271, type: 3}
+    - {fileID: 7001799106412903426, guid: 486a4d0b760b77d4cac7293e433e407f, type: 3}
+  ThrowableReferences:
+    keyData:
+    - ThrowableCity
+    - Throwableredirector
+    valueData:
+    - {fileID: 1668547243003732036, guid: 055dad3c690e16f48b24593521895851, type: 3}
+    - {fileID: 1668547243003732036, guid: 5a0db77f24c9281408b50363d76f6271, type: 3}

@@ -6,6 +6,7 @@ using Items.Buildings;
 using Items.Throwable;
 using Prefabs.Items;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine.Serialization;
 
 namespace Managers
@@ -61,7 +62,7 @@ namespace Managers
                 return;
             }
             instantiatedPrefab.GetComponent<NetworkObject>().Spawn();
-            instantiatedPrefab.Owner = owner;
+            instantiatedPrefab.SetOwnerServerRpc(owner);
             instantiatedPrefab.ThrowServer(pos, dir, strength);
         }
 
@@ -82,7 +83,7 @@ namespace Managers
             }
             
             instantiatedPrefab.GetComponent<NetworkObject>().Spawn();
-            instantiatedPrefab.Owner = owner;
+            instantiatedPrefab.SetOwnerServerRpc(owner);
         }
 
         [ServerRpc(RequireOwnership = false)]

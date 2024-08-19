@@ -61,7 +61,7 @@ MonoBehaviour:
   maxForce: 30
   minSlingDist: 0.5
   maxSlingDist: 6
-  launchYClamp: 20
+  launchYClamp: 10
   endOrientationSpeed: 0
   projectablesItem: []
   slingInput: 323

@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 1485200554649381201}
   - component: {fileID: 7001799106412903426}
   - component: {fileID: -8839500092191112841}
+  - component: {fileID: 5944716464364190206}
   m_Layer: 0
   m_Name: Redirector
   m_TagString: Untagged
@@ -215,7 +216,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: 0
-  HP: 0
+  HP:
+    m_InternalValue: 0
+  networkTransform: {fileID: 5944716464364190206}
   influenceCircle: {fileID: 8918279746703890379}
   lifeTime: 15
   radius: 2
@@ -244,6 +247,36 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &5944716464364190206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3794772719613217923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &6482988777907881470
 GameObject:
   m_ObjectHideFlags: 0

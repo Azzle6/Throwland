@@ -14,7 +14,7 @@ namespace Items.Throwable
             Debug.Log("End throw " + gameObject.name);
             if(Physics2D.OverlapPoint(transform.position,terrainMask) == null) return;
 
-            GlobalManager.Instance.RequestSpawnBuildingServerRpc(this.BuildingToPlace.ID, transform.position, this.Owner);
+            GlobalManager.Instance.RequestSpawnBuildingServerRpc(this.BuildingToPlace.ID, transform.position, this.Owner.Value);
         }
 
         public override void OnCollide(Collider2D collider)
