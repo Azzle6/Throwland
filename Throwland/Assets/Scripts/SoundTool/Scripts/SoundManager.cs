@@ -27,12 +27,14 @@ public class SoundManager : MonoBehaviour
 
     void InitializeSounds()
     {
-        foreach(SoundInfo s in musicList.sounds)
+        if (musicList != null)
         {
-            AudioSource aS = AddAudioSource(s);
-            audioList.Add(s, new List<AudioSource> { aS });
+            foreach (SoundInfo s in musicList.sounds)
+            {
+                AudioSource aS = AddAudioSource(s);
+                audioList.Add(s, new List<AudioSource> { aS });
+            }
         }
-
         foreach (SoundInfo s in soundList.sounds)
         {
             AudioSource aS = AddAudioSource(s);
@@ -70,8 +72,7 @@ public class SoundManager : MonoBehaviour
                 {
                     audioList[s][index].Stop();
                     return;
-                }
-                    
+                }    
             }
             
         }

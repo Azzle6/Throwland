@@ -161,11 +161,13 @@ public class Slinger : NetworkBehaviour
         {
             ThrowLocal("Projectile");
             this.StartCoroutine(this.SlingerCooldown());
+            SoundManager.instance.PlaySoundOnce("ShootSlam");
         }
         else if (Input.GetKeyUp(this.altSlingInput) && slingVector != Vector3.zero && this.canSlingInput)
         {
             ThrowLocal("ThrowableCity");
             this.StartCoroutine(this.SlingerCooldown());
+            SoundManager.instance.PlaySoundOnce("ShootSlam");
         }
             
 
@@ -207,7 +209,7 @@ public class Slinger : NetworkBehaviour
         float slingForce = Mathf.Lerp(minForce, maxForce, slingForceFactor);
         previseLine.SetPosition(1, launchPosition + previseVector.normalized * slingForce * previseReduction);
     }
-
+    
     void ThrowLocal(string elementToThrow)
     {
         //Vector3 slingDir = (startSlingPosition - endSlingPosition).normalized;
