@@ -12,6 +12,8 @@ using Unity.Services.Relay.Models;
 
 namespace Netcode
 {
+    using System;
+    using System.Collections.Generic;
     using UnityEngine;
     
     public class RelayLobbyManager : MonoBehaviour
@@ -23,12 +25,34 @@ namespace Netcode
         private TMP_Text joinCodeText;
         [SerializeField]
         private TMP_InputField codeInputField;
+
+        public DropdownUI regionDropDown;
+
+        public List<Region> regions = new List<Region>();
+        public string SelectedRegion { get ; private set; }
         
         private async void Start()
         {
             await UnityServices.InitializeAsync();
 
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+            regions = await RelayService.Instance.ListRegionsAsync();
+            List<string> regionNames = new List<string>();
+            foreach (var region in regions)
+            {
+                regionNames.Add(region.Id);
+            }
+
+            regionDropDown.dropdown.ClearOptions();
+            regionDropDown.dropdown.AddOptions(regionNames);
+            regionDropDown.dropdown.onValueChanged.AddListener(OnRegionSelected);
+        }
+
+        private void OnRegionSelected(int index)
+        {
+            Debug.Log(index);
+            SelectedRegion = regions[index].Id;
         }
 
         public async void StartRelayHost()
@@ -69,7 +93,9 @@ namespace Netcode
 
         private async Task<string> StartHost()
         {
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
+            
+
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2, SelectedRegion);
             
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));
 

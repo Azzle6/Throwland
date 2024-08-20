@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.Serialization;
+using System;
 
 public class Slinger : NetworkBehaviour
 {
@@ -48,9 +49,13 @@ public class Slinger : NetworkBehaviour
     [BoxGroup("Movement")]
     [SerializeField] private KeyCode goLeft = KeyCode.Q;
     [BoxGroup("Movement")]
+    [SerializeField] private KeyCode goLeftAlt = KeyCode.A;
+    [BoxGroup("Movement")]
     [SerializeField] private KeyCode goRight = KeyCode.D;
     [BoxGroup("Movement")]
     [SerializeField] private KeyCode goUp = KeyCode.Z;
+    [BoxGroup("Movement")]
+    [SerializeField] private KeyCode goUpAlt = KeyCode.A;
     [BoxGroup("Movement")]
     [SerializeField] private KeyCode goDown = KeyCode.S;
 
@@ -83,6 +88,12 @@ public class Slinger : NetworkBehaviour
             ChangePositionServerRpc(newPos);
         }
         this.isStun.OnValueChanged += OnStunValueChanged;
+        this.ItemOwner.OnValueChanged += OnItemOwnerValueChanged;
+    }
+
+    private void OnItemOwnerValueChanged(E_ItemOwner previousValue, E_ItemOwner newValue)
+    {
+        this.spriteColorTeam.SetTeam((int)newValue);
     }
 
     private void OnStunValueChanged(bool previousvalue, bool newvalue)
@@ -133,8 +144,12 @@ public class Slinger : NetworkBehaviour
         //Update launch position
 
         Vector3 moveDirection = Vector3.zero;
-        moveDirection.x = (Input.GetKey(this.goRight) ? this.movementSpeed : 0) - (Input.GetKey(this.goLeft) ? this.movementSpeed : 0);
-        moveDirection.y = (Input.GetKey(this.goUp) ? this.movementSpeed : 0) - (Input.GetKey(this.goDown) ? this.movementSpeed : 0);
+
+        float horiz = Input.GetAxisRaw("Horizontal");
+        float verti = Input.GetAxisRaw("Vertical");
+
+        moveDirection.x = horiz * this.movementSpeed;
+        moveDirection.y = verti * this.movementSpeed;
         moveDirection = Vector3.ClampMagnitude(moveDirection, this.movementSpeed);
         this.transform.position += moveDirection * (Time.deltaTime * (this.isStun.Value ? 0.8f : 1));
         this.launchPosition = this.transform.position;

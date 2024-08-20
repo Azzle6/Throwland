@@ -75,8 +75,8 @@ MonoBehaviour:
   radius: 0
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
-  lifeTime: 2.5
-  dragCoeff: 1.96
+  lifeTime: 1
+  dragCoeff: 3
   terrainMask:
     serializedVersion: 2
     m_Bits: 128
