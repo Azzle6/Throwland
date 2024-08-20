@@ -2097,6 +2097,7 @@ GameObject:
   - component: {fileID: 885980791}
   - component: {fileID: 885980793}
   - component: {fileID: 885980792}
+  - component: {fileID: 885980794}
   m_Layer: 0
   m_Name: GlobalManager
   m_TagString: Untagged
@@ -2157,6 +2158,21 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &885980794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885980790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76e613e57e4d3494d8a62f774c99edbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicList: {fileID: 11400000, guid: 656a24212cfd0714ba667607af637077, type: 2}
+  soundList: {fileID: 11400000, guid: 74e1be19a839ccf40853722b603ea713, type: 2}
+  mainMixer: {fileID: 24100000, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
 --- !u!1 &909484907
 GameObject:
   m_ObjectHideFlags: 0
