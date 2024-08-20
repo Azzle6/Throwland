@@ -1,0 +1,4 @@
+[20/08/2024, 17:34:16] layer "Sprite_Boat.png copie": Expected end of input but "c" found.
+[20/08/2024, 17:34:16] layer "Sprite_SmokePoof.png copie": Expected end of input but "c" found.
+[20/08/2024, 17:34:16] layer "Sprite_SmokePoof.png copie 2": Expected end of input but "c" found.
+[20/08/2024, 17:34:16] layer "Sprite_Island.png copie": Expected end of input but "c" found.

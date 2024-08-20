@@ -1,3 +1,4 @@
+using Items;
 using Items.Throwable;
 using Managers;
 using TMPro;
@@ -13,6 +14,10 @@ public class UIManager : Singleton<UIManager>
     public JaugeUI projectileCd;
     public TextMeshProUGUI projectileCountText;
     public CanvasGroup projectileUI;
+
+    public Canvas GameOverCnv;
+    public TextMeshProUGUI gameoverPlayerText;
+    public Color[] colors;
 
     private void Start()
     {
@@ -32,5 +37,15 @@ public class UIManager : Singleton<UIManager>
     public void SetSelectedBuilding(string id)
     {
         this.SelectedBuilding = id;
+    }
+
+    public void DisplayDefeat(E_ItemOwner loser)
+    {
+        var winner = E_ItemOwner.PLAYER_1;
+        if (loser == E_ItemOwner.PLAYER_1) winner = E_ItemOwner.PLAYER_2;
+
+        gameoverPlayerText.text = winner.ToString();
+        gameoverPlayerText.color = colors[(int)loser];
+        GameOverCnv.enabled = true;
     }
 }

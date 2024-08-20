@@ -53,8 +53,7 @@ namespace Items.Throwable
 
         private void FixedUpdate()
         {
-            if(!IsOwner)
-                return;
+            if(!IsServer) return;
             
             transform.position += (Vector3)velocity * Time.fixedDeltaTime;
             Vector2 dragForce = 0.5f * velocity * dragCoeff; // * velocity.magnitude;

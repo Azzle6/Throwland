@@ -8,6 +8,7 @@ using Unity.Netcode;
 using UnityEngine.Serialization;
 using System;
 using Unity.Netcode.Components;
+using UnityEngine.UI;
 
 public class Slinger : NetworkBehaviour
 {
@@ -72,6 +73,11 @@ public class Slinger : NetworkBehaviour
 
     public NetworkVariable<int> projectileLeftCount;
 
+    public NetworkVariable<int> health;
+    public int maxHealth = 10;
+
+    public Image healthFill;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -96,18 +102,29 @@ public class Slinger : NetworkBehaviour
                 : GlobalManager.Instance.SecondSlingerSpawn.position;
 
             ChangePositionServerRpc(newPos);
-            UIManager.Instance.projectileCountText.GetComponentInParent<TeamColoredVisual>().SetTeam((int)ItemOwner.Value);
         }
+
+        if(IsLocalPlayer) UIManager.Instance.projectileCountText.GetComponentInParent<TeamColoredVisual>().SetTeam((int)ItemOwner.Value);
+
+
         this.isStun.OnValueChanged += OnStunValueChanged;
         this.ItemOwner.OnValueChanged += OnItemOwnerValueChanged;
 
         projectileLeftCount.OnValueChanged += OnProjectileLeftCountChanged;
         OnProjectileLeftCountChanged(0, projectileLeftCount.Value);
 
+        if (IsServer) health.Value = maxHealth;
+        if (IsClient) health.OnValueChanged += OnHealthChanged;
+    }
+
+    private void OnHealthChanged(int previousValue, int newValue)
+    {
+        healthFill.fillAmount = (float)health.Value / (float)maxHealth;       
     }
 
     private void OnProjectileLeftCountChanged(int previousValue, int newValue)
     {
+        if (!IsLocalPlayer) return;
         UIManager.Instance.projectileCountText.text = "x" + newValue.ToString();
         if (newValue == 0) UIManager.Instance.projectileUI.alpha = 0.3f;
         else UIManager.Instance.projectileUI.alpha = 1f;
@@ -186,16 +203,19 @@ public class Slinger : NetworkBehaviour
 
         //Update launch position
 
-        Vector3 moveDirection = Vector3.zero;
+        if(IsLocalPlayer)
+        {
+            Vector3 moveDirection = Vector3.zero;
 
-        float horiz = Input.GetAxisRaw("Horizontal");
-        float verti = Input.GetAxisRaw("Vertical");
+            float horiz = Input.GetAxisRaw("Horizontal");
+            float verti = Input.GetAxisRaw("Vertical");
 
-        moveDirection.x = horiz * this.movementSpeed;
-        moveDirection.y = verti * this.movementSpeed;
-        moveDirection = Vector3.ClampMagnitude(moveDirection, this.movementSpeed);
-        rb.velocity = moveDirection * (this.isStun.Value ? 0.8f : 1);
-        this.launchPosition = this.rb.position;
+            moveDirection.x = horiz * this.movementSpeed;
+            moveDirection.y = verti * this.movementSpeed;
+            moveDirection = Vector3.ClampMagnitude(moveDirection, this.movementSpeed);
+            rb.velocity = moveDirection * (this.isStun.Value ? 0.8f : 1);
+            this.launchPosition = this.rb.position;
+        }
 
 
         /*launchPosition = startSlingPosition;
@@ -253,7 +273,9 @@ public class Slinger : NetworkBehaviour
 
     void UpdateSlingVisual()
     {
-        if (canThrowCity == false || isStun.Value)
+        bool shouldHideForCity = (canThrowCity == false || isStun.Value) && Input.GetKey(altSlingInput);
+        bool shouldHideForProj = (projectileLeftCount.Value <= 0 || isStun.Value) && Input.GetKey(slingInput);
+        if (shouldHideForCity||shouldHideForProj)
         {
             startSlingSprite.transform.localPosition = Vector3.zero;
             endSlingSprite.transform.localPosition = Vector3.zero;
@@ -310,6 +332,15 @@ public class Slinger : NetworkBehaviour
     public void StunSlingerServerRpc(bool value)
     {
         this.isStun.Value = value;
+        if (value) health.Value--;
+        if (health.Value <= 0) Destroy(gameObject);
+    }
+
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        UIManager.Instance.DisplayDefeat(ItemOwner.Value);
     }
 
     public void StunSlinger()
@@ -325,7 +356,7 @@ public class Slinger : NetworkBehaviour
     {
         this.canThrowCity = false;
         //UIManager.Instance.projectileCd.StartCooldown(slingCooldown);
-        UIManager.Instance.cityCd.StartCooldown(cityCooldown);
+        if(IsLocalPlayer) UIManager.Instance.cityCd.StartCooldown(cityCooldown);
         yield return new WaitForSeconds(cityCooldown);
         this.canThrowCity = true;
     }
