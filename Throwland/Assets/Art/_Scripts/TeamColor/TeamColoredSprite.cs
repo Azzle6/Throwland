@@ -17,7 +17,7 @@ public class TeamColoredSprite : TeamColoredVisual
     {
         base.OnSetTeam();
         if (spriteRenderer == null) return;
-        Debug.Log(teamIndex);
+        //Debug.Log(teamIndex);
         spriteRenderer.color = colors[teamIndex];
     }
 }
