@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Throwland/Assets/Scripts/SoundTool.meta
 guid: 1d1d02e99ee2fc4468ef6ebc531bf7c8
 folderAsset: yes
 DefaultImporter:
+========
+guid: 03569b191b6fd804eabd09ee85574ac6
+PrefabImporter:
+>>>>>>>> main:Throwland/Assets/Art/VFX/VFX_BASE.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

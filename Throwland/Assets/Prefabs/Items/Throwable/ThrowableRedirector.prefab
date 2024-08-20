@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761a6b81fe904694a0799b42bf4a240c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Owner: 0
+  Owner:
+    m_InternalValue: 0
   HP:
     m_InternalValue: 0
   radius: 0
@@ -63,6 +64,7 @@ MonoBehaviour:
     m_Bits: 0
   endOrientation: {x: 0, y: 0, z: 0, w: 0}
   BuildingToPlace: {fileID: 7001799106412903426, guid: 486a4d0b760b77d4cac7293e433e407f, type: 3}
+  sprite: {fileID: 21300000, guid: 066c0b04be98cd348abb79add91d42bf, type: 3}
 --- !u!114 &2744485547192921520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,8 +126,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ae4bac667867eb04e836f60faf4ec03f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 066c0b04be98cd348abb79add91d42bf, type: 3}
+  m_Color: {r: 0.679, g: 0.679, b: 0.679, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

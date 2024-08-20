@@ -19,6 +19,13 @@ namespace Items.Throwable
 
         public override void OnCollide(Collider2D collider)
         {
+            City city = collider.GetComponent<City>();
+            if (this.BuildingToPlace.GetType() == typeof(City) && city != null && city.Owner.Value == this.Owner.Value)
+            {
+                city.ChangeHpServerRpc(city.HP.Value + 10);
+                this.DeleteItemServerRpc();
+                return;
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Managers;
-using Unity.Netcode;
 using UnityEngine;
 
 namespace Items.Buildings
@@ -11,6 +10,8 @@ namespace Items.Buildings
         private CityVisuals cityVisuals;
         [SerializeField]
         private SpriteRenderer circleZoneRenderer;
+        [SerializeField] 
+        private TeamColoredSprite teamColor;
 
         public int TickCountBetweenGrowth = 5;
         
@@ -18,12 +19,14 @@ namespace Items.Buildings
 
         public override void OnNetworkSpawn()
         {
+            
             this.HP.OnValueChanged += OnHPChanged;
             this.Owner.OnValueChanged += OnOwnerChanged;
             
             if(!IsHost)
                 return;
             
+            ChangeHpServerRpc(10);
             GlobalManager.Instance.Tick += this.TryGrowth;
         }
 
@@ -31,12 +34,20 @@ namespace Items.Buildings
         {
             Debug.Log($"Change city owner to {newvalue}.");
             this.cityVisuals.SetTeamIndex((int)Owner.Value);
+            this.teamColor.SetTeam((int)this.Owner.Value);
         }
 
         private void OnHPChanged(int previousvalue, int newvalue)
         {
+            Debug.Log($"Change city Hp from {previousvalue} to {newvalue}");
+            if (newvalue <= 0)
+            {
+                GlobalManager.Instance.Tick -= this.TryGrowth;
+                this.DeleteItemServerRpc();
+                return;
+            }
             this.circleZoneRenderer.size = Vector2.one * (newvalue / 5f);
-            this.cityVisuals.UpdateRadius(newvalue / 10f);
+            this.cityVisuals.UpdateRadius(newvalue / 10f, newvalue < previousvalue);
         }
 
         private void TryGrowth()

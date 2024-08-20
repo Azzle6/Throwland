@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3317968039186067539}
-  - component: {fileID: 7773582300508424616}
   - component: {fileID: 8518798571747337942}
+  - component: {fileID: 7773582300508424616}
   - component: {fileID: 1921397791482913221}
-  m_Layer: 0
+  - component: {fileID: 2399230510619067612}
+  m_Layer: 9
   m_Name: City
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,25 +36,6 @@ Transform:
   - {fileID: 1055101490711027906}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7773582300508424616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5697457701046097640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b5a5d339c5d4adea8ea28bb68a5f997, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Owner: 0
-  HP:
-    m_InternalValue: 0
-  networkTransform: {fileID: 1921397791482913221}
-  cityVisuals: {fileID: 2408842572089803682}
-  circleZoneRenderer: {fileID: 9019777441154619049}
-  TickCountBetweenGrowth: 4
 --- !u!114 &8518798571747337942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
+  GlobalObjectIdHash: 3795838886
+  InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -74,6 +57,27 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &7773582300508424616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5697457701046097640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5a5d339c5d4adea8ea28bb68a5f997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Owner:
+    m_InternalValue: 0
+  HP:
+    m_InternalValue: 0
+  networkTransform: {fileID: 1921397791482913221}
+  cityVisuals: {fileID: 2408842572089803682}
+  circleZoneRenderer: {fileID: 9019777441154619049}
+  teamColor: {fileID: 7551328376298421795}
+  TickCountBetweenGrowth: 4
 --- !u!114 &1921397791482913221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
@@ -104,6 +109,41 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!58 &2399230510619067612
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5697457701046097640}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1001 &7130305936755030380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,9 +156,17 @@ PrefabInstance:
       propertyPath: m_DrawMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3011325779183123206, guid: 481881b5d93c0c84fae93877f7640e1c, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6178649592594120067, guid: 481881b5d93c0c84fae93877f7640e1c, type: 3}
       propertyPath: m_Name
       value: CityVisuals
+      objectReference: {fileID: 0}
+    - target: {fileID: 6178649592594120067, guid: 481881b5d93c0c84fae93877f7640e1c, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7806873747397581230, guid: 481881b5d93c0c84fae93877f7640e1c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -179,6 +227,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 055d7582fba38c44180809bf5d1a0387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7551328376298421795 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 736437903139030863, guid: 481881b5d93c0c84fae93877f7640e1c, type: 3}
+  m_PrefabInstance: {fileID: 7130305936755030380}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a745d81986f45a148ae718d4a2123f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &9019777441154619049 stripped

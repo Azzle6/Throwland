@@ -8,13 +8,15 @@ namespace Items.Throwable
     public abstract class Throwable : Item
     {
         public float radius;
+        [HideInInspector]
         public Vector2 velocity;
+        [HideInInspector]
         public Vector2 acceleration; // Gravity as an example
         public float lifeTime;
         public float dragCoeff;
         public LayerMask terrainMask;
         public LayerMask collisionMask;
-        public Quaternion endOrientation;
+        public Sprite sprite;
 
         public abstract void OnEndThrowServer();
 
@@ -38,9 +40,10 @@ namespace Items.Throwable
                 return;
             
             lifeTime -= Time.deltaTime;
-            if (lifeTime < 0)
+            if (lifeTime < 0 || this.velocity.magnitude < 0.3f)
             {
                 Destroy();
+                return;
             }
 
             var hit = Physics2D.OverlapCircle(transform.position, radius, collisionMask);
@@ -68,6 +71,11 @@ namespace Items.Throwable
         {
             OnEndThrowServer();
             this.DeleteItemServerRpc();
+        }
+
+        public void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(transform.position, this.radius);
         }
     }
 }

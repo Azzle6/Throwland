@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4414294763504184695}
-  - component: {fileID: 1668547243003732036}
   - component: {fileID: 2744485547192921520}
+  - component: {fileID: 1668547243003732036}
   - component: {fileID: -4560406098185158456}
   - component: {fileID: -3371280034510294245}
   m_Layer: 0
@@ -35,34 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1668547243003732036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630902707383446515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 761a6b81fe904694a0799b42bf4a240c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Owner: 0
-  HP:
-    m_InternalValue: 0
-  radius: 0
-  velocity: {x: 0, y: 0}
-  acceleration: {x: 0, y: 0}
-  lifeTime: 3
-  dragCoeff: 0.5
-  terrainMask:
-    serializedVersion: 2
-    m_Bits: 128
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 0
-  endOrientation: {x: 0, y: 0, z: 0, w: 0}
-  BuildingToPlace: {fileID: 7773582300508424616, guid: a3bf4e6f67a3d354e9c188f96a18b08e, type: 3}
 --- !u!114 &2744485547192921520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
+  GlobalObjectIdHash: 2874344458
+  InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -83,6 +56,35 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &1668547243003732036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630902707383446515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761a6b81fe904694a0799b42bf4a240c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Owner:
+    m_InternalValue: 0
+  HP:
+    m_InternalValue: 0
+  radius: 0
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  lifeTime: 2.5
+  dragCoeff: 1.96
+  terrainMask:
+    serializedVersion: 2
+    m_Bits: 128
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 512
+  sprite: {fileID: 21300000, guid: 2a31717b712a98c46b5deec8a218b019, type: 3}
+  BuildingToPlace: {fileID: 7773582300508424616, guid: a3bf4e6f67a3d354e9c188f96a18b08e, type: 3}
 --- !u!212 &-4560406098185158456
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -124,8 +126,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ae4bac667867eb04e836f60faf4ec03f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 2a31717b712a98c46b5deec8a218b019, type: 3}
+  m_Color: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -147,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 0

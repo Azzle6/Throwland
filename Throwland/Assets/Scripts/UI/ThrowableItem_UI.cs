@@ -8,11 +8,12 @@ public class ThrowableItem_UI : MonoBehaviour
 {
     [SerializeField] Image Icon;
     [SerializeField] Ressource_UI[] Ressources_UI;
+    public Button Button;
 
-    void UpdateView(ThrowableItemData item)
+    public void UpdateView(ThrowableItemData item)
     {
         Icon.sprite = item.sprite;
-        if (item.woodQty > 0)
+        /*if (item.woodQty > 0)
             Ressources_UI[0].UpdateView(new ResourceQuantity(E_ResourceType.WOOD,item.woodQty));
         else
             Ressources_UI[0].gameObject.SetActive(false);
@@ -20,7 +21,7 @@ public class ThrowableItem_UI : MonoBehaviour
         if (item.crystalQty > 0)
             Ressources_UI[1].UpdateView(new ResourceQuantity(E_ResourceType.CRYSTAL, item.woodQty));
         else
-            Ressources_UI[1].gameObject.SetActive(false);
+            Ressources_UI[1].gameObject.SetActive(false);*/
     }
 }
 
@@ -30,6 +31,11 @@ public struct ThrowableItemData
     public string name;
     public Sprite sprite;
 
-    public int woodQty, crystalQty;
+    public ThrowableItemData(Sprite sprite, string name)
+    {
+        this.sprite = sprite;
+        this.name = name;
+    }
 
+    //public int woodQty, crystalQty;
 }
