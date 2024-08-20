@@ -1,5 +1,6 @@
 using Items.Throwable;
 using Managers;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
@@ -10,6 +11,8 @@ public class UIManager : Singleton<UIManager>
 
     public JaugeUI cityCd;
     public JaugeUI projectileCd;
+    public TextMeshProUGUI projectileCountText;
+    public CanvasGroup projectileUI;
 
     private void Start()
     {

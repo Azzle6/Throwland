@@ -61,6 +61,15 @@ namespace Items
         public void ChangeHpServerRpc(int newHp)
         {
             this.HP.Value = newHp;
+            Slinger[] slingers = FindObjectsByType<Slinger>(FindObjectsSortMode.None);
+
+            foreach (var slinger in slingers)
+            {
+                if(slinger.ItemOwner.Value == Owner.Value)
+                {
+                    slinger.projectileLeftCount.Value += 1;
+                }
+            }
         }
         
     }
