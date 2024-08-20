@@ -26,7 +26,24 @@ namespace Items
         {
             Owner.Value = owner;
         }
-        
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+            Owner.OnValueChanged += OnOwnerValueChanged;
+            OnOwnerValueChanged(Owner.Value, Owner.Value);
+        }
+
+        private void OnOwnerValueChanged(E_ItemOwner previousValue, E_ItemOwner newValue)
+        {
+            TeamColoredVisual[] visuals = GetComponentsInChildren<TeamColoredVisual>(true);
+
+            foreach (var visual in visuals)
+            {
+                visual.SetTeam((int)newValue);
+            }
+        }
+
         //[ServerRpc(RequireOwnership = false)]
         //public void ChangePositionServerRpc(Vector3 pos)
         //{
@@ -44,6 +61,24 @@ namespace Items
         public void ChangeHpServerRpc(int newHp)
         {
             this.HP.Value = newHp;
+            Slinger[] slingers = FindObjectsByType<Slinger>(FindObjectsSortMode.None);
+
+            foreach (var slinger in slingers)
+            {
+                if(slinger.ItemOwner.Value == Owner.Value)
+                {
+                    slinger.projectileLeftCount.Value += 1;
+                }
+            }
+
+          
+
+
+        }
+
+        public virtual void OnChangeHPServer()
+        {
+            
         }
         
     }

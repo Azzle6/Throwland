@@ -1,12 +1,11 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Throwland/Assets/Scriptables/Scriptables.meta
+<<<<<<<< HEAD:Throwland/Assets/Art/UI/_CORE.meta
+guid: 085c1330a8c10a94f9d64ca293c9ee3a
+========
 guid: 5582f94f6cdb101419fdbe4eef786bf3
+>>>>>>>> Luac:Throwland/Assets/Scriptables/Scriptables.meta
 folderAsset: yes
 DefaultImporter:
-========
-guid: e96cebf8c94595a42a074afa2e97ef54
-PrefabImporter:
->>>>>>>> main:Throwland/Assets/Art/VFX/VFX_Explosion.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

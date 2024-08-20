@@ -1,12 +1,6 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Throwland/Assets/Scriptables/Sounds.meta
-guid: dd7ab5e09209d2348897a585c8fb2922
-folderAsset: yes
-DefaultImporter:
-========
 guid: 05290b8af9337344d9d1423d3d26751a
 PrefabImporter:
->>>>>>>> main:Throwland/Assets/Prefabs/Items/Throwable/ThrowableProjectile.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

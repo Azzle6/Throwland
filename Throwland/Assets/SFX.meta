@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Throwland/Assets/SFX.meta
-guid: ce27f403e60d1ef449d6ef0ff35b7a58
+<<<<<<<< HEAD:Throwland/Assets/Art/Boat/Repair.meta
+guid: 35e1b336d665c5847aaa28fc3f1afd63
 ========
-guid: 4995487f485ab8048807e18f140a9b60
->>>>>>>> main:Throwland/Assets/Art/Boat/Repair.meta
+guid: ce27f403e60d1ef449d6ef0ff35b7a58
+>>>>>>>> Luac:Throwland/Assets/SFX.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

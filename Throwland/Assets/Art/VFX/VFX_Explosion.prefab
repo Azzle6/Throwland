@@ -14670,7 +14670,7 @@ GameObject:
   - component: {fileID: 9065594711495521975}
   - component: {fileID: 706680384884298949}
   m_Layer: 0
-  m_Name: VFX_Smoke (1)
+  m_Name: VFX_Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24527,10 +24527,69 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4475725900977746745, guid: 03569b191b6fd804eabd09ee85574ac6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4014778789801884871}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3710238147147146021, guid: 03569b191b6fd804eabd09ee85574ac6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6730113151943355069}
   m_SourcePrefab: {fileID: 100100000, guid: 03569b191b6fd804eabd09ee85574ac6, type: 3}
 --- !u!4 &3548158709097585605 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4475725900977746745, guid: 03569b191b6fd804eabd09ee85574ac6, type: 3}
   m_PrefabInstance: {fileID: 1090275121588037884}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4349358614624619481 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3710238147147146021, guid: 03569b191b6fd804eabd09ee85574ac6, type: 3}
+  m_PrefabInstance: {fileID: 1090275121588037884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6730113151943355069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4349358614624619481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0746e7006f03a104f80975c1dba24668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    duration: 0.4
+    intensity: 0.5
+    frequency: 10
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.15430178
+        value: 0.71520543
+        inSlope: -1.6913965
+        outSlope: -1.6913965
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CameraShake: 1
+  onAwake: 1

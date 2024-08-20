@@ -1,4 +1,5 @@
 ﻿using Managers;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace Items.Buildings
@@ -13,6 +14,8 @@ namespace Items.Buildings
         [SerializeField] 
         private TeamColoredSprite teamColor;
 
+        public Animator canvasAnimator;
+
         public int TickCountBetweenGrowth = 5;
         
         private int tickGrowthCount;
@@ -26,7 +29,7 @@ namespace Items.Buildings
             if(!IsHost)
                 return;
             
-            ChangeHpServerRpc(10);
+            ChangeHpServerRpc(1);
             GlobalManager.Instance.Tick += this.TryGrowth;
         }
 
@@ -35,6 +38,11 @@ namespace Items.Buildings
             Debug.Log($"Change city owner to {newvalue}.");
             this.cityVisuals.SetTeamIndex((int)Owner.Value);
             this.teamColor.SetTeam((int)this.Owner.Value);
+            TeamColoredVisual[] visuals = GetComponentsInChildren<TeamColoredVisual>(true);
+            foreach (var visual in visuals)
+            {
+                visual.SetTeam((int)this.Owner.Value);
+            }
         }
 
         private void OnHPChanged(int previousvalue, int newvalue)
@@ -46,8 +54,23 @@ namespace Items.Buildings
                 this.DeleteItemServerRpc();
                 return;
             }
-            this.circleZoneRenderer.size = Vector2.one * (newvalue / 5f);
-            this.cityVisuals.UpdateRadius(newvalue / 10f, newvalue < previousvalue);
+            this.circleZoneRenderer.size = Vector2.one * (10 + newvalue) / 5f;
+            this.cityVisuals.UpdateRadius((10 + newvalue) / 10f, newvalue < previousvalue);
+            UpdateCollider();
+
+            canvasAnimator.SetTrigger("Grow");
+        }
+
+        public override void OnChangeHPServer()
+        {
+            base.OnChangeHPServer();
+            UpdateCollider();
+        }
+
+        private void UpdateCollider()
+        {
+            CircleCollider2D coll = GetComponent<CircleCollider2D>();
+            if (coll != null) coll.radius = (10 + HP.Value) / 10f;
         }
 
         private void TryGrowth()

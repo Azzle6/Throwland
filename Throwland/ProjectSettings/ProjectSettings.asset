@@ -751,11 +751,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 3280d82d-f883-4fdb-9cd9-256b8e79a9b2
+  cloudProjectId: dac72dcb-b887-48e9-9df4-7a52548800c3
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Throwland 2024-08-18_00-37-17
-  organizationId: xxskorpxx
+  projectName: Throwland (1)
+  organizationId: pataya
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
