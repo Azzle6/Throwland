@@ -219,11 +219,13 @@ public class Slinger : NetworkBehaviour
         if (Input.GetKeyUp(slingInput) && projectileLeftCount.Value > 0 && slingVector != Vector3.zero && !this.isStun.Value)
         {
             ThrowLocal("Projectile");
+            if (SoundManager.instance != null) SoundManager.instance.PlaySoundOnce("Fire");
             //this.StartCoroutine(this.SlingerCooldown());
         }
         else if (Input.GetKeyUp(this.altSlingInput) && slingVector != Vector3.zero && this.canThrowCity && !this.isStun.Value)
         {
             ThrowLocal("ThrowableCity");
+            if (SoundManager.instance != null) SoundManager.instance.PlaySoundOnce("ShootSlam");
             this.StartCoroutine(this.CityCooldown());
         }
 
