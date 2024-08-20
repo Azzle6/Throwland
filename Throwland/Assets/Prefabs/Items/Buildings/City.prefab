@@ -77,7 +77,7 @@ MonoBehaviour:
   cityVisuals: {fileID: 2408842572089803682}
   circleZoneRenderer: {fileID: 9019777441154619049}
   teamColor: {fileID: 7551328376298421795}
-  TickCountBetweenGrowth: 4
+  TickCountBetweenGrowth: 20
 --- !u!114 &1921397791482913221
 MonoBehaviour:
   m_ObjectHideFlags: 0
