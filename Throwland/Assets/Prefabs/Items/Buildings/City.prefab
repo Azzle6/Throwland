@@ -624,7 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3795838886
+  GlobalObjectIdHash: 2059183612
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -654,7 +654,7 @@ MonoBehaviour:
   circleZoneRenderer: {fileID: 9019777441154619049}
   teamColor: {fileID: 7551328376298421795}
   canvasAnimator: {fileID: 3719091544076526170}
-  TickCountBetweenGrowth: 4
+  TickCountBetweenGrowth: 8
 --- !u!114 &1921397791482913221
 MonoBehaviour:
   m_ObjectHideFlags: 0

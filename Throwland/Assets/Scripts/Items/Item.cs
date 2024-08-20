@@ -70,6 +70,15 @@ namespace Items
                     slinger.projectileLeftCount.Value += 1;
                 }
             }
+
+          
+
+
+        }
+
+        public virtual void OnChangeHPServer()
+        {
+            
         }
         
     }

@@ -1,4 +1,5 @@
 ﻿using Managers;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace Items.Buildings
@@ -55,7 +56,21 @@ namespace Items.Buildings
             }
             this.circleZoneRenderer.size = Vector2.one * (10 + newvalue) / 5f;
             this.cityVisuals.UpdateRadius((10 + newvalue) / 10f, newvalue < previousvalue);
+            UpdateCollider();
+
             canvasAnimator.SetTrigger("Grow");
+        }
+
+        public override void OnChangeHPServer()
+        {
+            base.OnChangeHPServer();
+            UpdateCollider();
+        }
+
+        private void UpdateCollider()
+        {
+            CircleCollider2D coll = GetComponent<CircleCollider2D>();
+            if (coll != null) coll.radius = (10 + HP.Value) / 10f;
         }
 
         private void TryGrowth()
