@@ -1,13 +1,10 @@
 using System;
-using System.Collections;
 using System.Threading.Tasks;
 using Items;
 using Items.Buildings;
 using Items.Throwable;
 using Prefabs.Items;
 using Unity.Netcode;
-using Unity.Netcode.Components;
-using UnityEngine.Serialization;
 
 namespace Managers
 {
@@ -55,7 +52,7 @@ namespace Managers
                 return;
             }
             
-            Throwable instantiatedPrefab = Instantiate(this.AssetsReferences.ItemsReferences[throwableID]) as Throwable;
+            Throwable instantiatedPrefab = Instantiate(this.AssetsReferences.ItemsReferences[throwableID], pos, Quaternion.LookRotation(Vector3.forward, dir)) as Throwable;
             if (instantiatedPrefab == null)
             {
                 Debug.LogWarning($"item with ID {throwableID} isn't a throwable one.");

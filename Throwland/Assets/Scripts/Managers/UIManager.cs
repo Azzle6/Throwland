@@ -1,23 +1,24 @@
+using Items.Throwable;
 using Managers;
-using TMPro;
 using UnityEngine;
-using Button = UnityEngine.UI.Button;
 
 public class UIManager : MonoBehaviour
 {
     public string SelectedBuilding;
     public GameObject DebugButtonsParent;
-    public Button ButtonTemplate;
+    public ThrowableItem_UI ButtonTemplate;
     private void Start()
     {
         foreach (var itemsReference in GlobalManager.Instance.AssetsReferences.ThrowableReferences)
         {
-            Button button = Instantiate(this.ButtonTemplate, this.DebugButtonsParent.transform);
+            ThrowableItem_UI itemUI = Instantiate(this.ButtonTemplate, this.DebugButtonsParent.transform);
             string id = itemsReference.Key;
-            button.GetComponentInChildren<TMP_Text>().text = id;
-            button.onClick.AddListener(() => SetSelectedBuilding(id));
+            itemUI.Button.onClick.AddListener(() => SetSelectedBuilding(id));
+            itemUI.UpdateView(new ThrowableItemData(((Throwable)itemsReference.Value).sprite, itemsReference.Key));
             SelectedBuilding = id;
         }
+        
+        SetSelectedBuilding("ThrowableCity");
     }
 
     public void SetSelectedBuilding(string id)

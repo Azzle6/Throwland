@@ -8,8 +8,10 @@ namespace Items
     public abstract class Item : NetworkBehaviour
     {
         public string ID => name;
+        [HideInInspector]
         public NetworkVariable<E_ItemOwner> Owner;
-        public NetworkVariable<int> HP;
+        [HideInInspector]
+        public NetworkVariable<int> HP = new NetworkVariable<int>();
         public abstract void OnHit(int damages);
 
         [ServerRpc(RequireOwnership = false)]
