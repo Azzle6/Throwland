@@ -163,6 +163,9 @@ public class Slinger : NetworkBehaviour
 
     void UpdateSlingParameter()
     {
+        if (this.isStun.Value) return;
+       
+
         // Get Mouse Position
         var mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
@@ -179,7 +182,9 @@ public class Slinger : NetworkBehaviour
         moveDirection = Vector3.ClampMagnitude(moveDirection, this.movementSpeed);
         rb.velocity = moveDirection * (this.isStun.Value ? 0.8f : 1);
         this.launchPosition = this.rb.position;
-        
+
+
+        if (this.canSlingInput == false) return;
         /*launchPosition = startSlingPosition;
         launchPosition.x = transform.position.x;
         launchPosition.y = Mathf.Clamp(launchPosition.y, transform.position.y - launchYClamp * 0.5f, transform.position.y + launchYClamp * 0.5f);*/
@@ -198,12 +203,12 @@ public class Slinger : NetworkBehaviour
     }
     void PerformInputs()
     {
-        if (Input.GetKeyUp(slingInput) && slingVector != Vector3.zero && this.canSlingInput)
+        if (Input.GetKeyUp(slingInput) && slingVector != Vector3.zero && this.canSlingInput && !this.isStun.Value)
         {
             ThrowLocal("Projectile");
             this.StartCoroutine(this.SlingerCooldown());
         }
-        else if (Input.GetKeyUp(this.altSlingInput) && slingVector != Vector3.zero && this.canSlingInput)
+        else if (Input.GetKeyUp(this.altSlingInput) && slingVector != Vector3.zero && this.canSlingInput && !this.isStun.Value)
         {
             ThrowLocal("ThrowableCity");
             this.StartCoroutine(this.SlingerCooldown());
@@ -235,6 +240,23 @@ public class Slinger : NetworkBehaviour
     
     void UpdateSlingVisual()
     {
+        if(canSlingInput == false || isStun.Value)
+        {
+            startSlingSprite.transform.localPosition = Vector3.zero;
+            endSlingSprite.transform.localPosition = Vector3.zero;
+            startSlingSprite.enabled = false;
+            endSlingSprite.enabled = false;
+            slingLine.SetPosition(0, transform.position);
+            slingLine.SetPosition(1, transform.position);
+
+            previseLine.SetPosition(0, transform.position);
+            previseLine.SetPosition(1, transform.position);
+            return;
+        }
+
+        startSlingSprite.enabled = true;
+        endSlingSprite.enabled = true;
+
         startSlingSprite.transform.position = startSlingPosition;
         endSlingSprite.transform.position = endSlingPosition;
         //lastStartSlingSprite.transform.position = launchPosition;
@@ -274,10 +296,13 @@ public class Slinger : NetworkBehaviour
         currentStunCoroutine = StartCoroutine(this.StunCooldown());
     }
 
+    public float slingCooldown = 1.3f;
     private IEnumerator SlingerCooldown()
     {
         this.canSlingInput = false;
-        yield return new WaitForSeconds(1.3f);
+        UIManager.Instance.projectileCd.StartCooldown(slingCooldown);
+        UIManager.Instance.cityCd.StartCooldown(slingCooldown);
+        yield return new WaitForSeconds(slingCooldown);
         this.canSlingInput = true;
     }
     
