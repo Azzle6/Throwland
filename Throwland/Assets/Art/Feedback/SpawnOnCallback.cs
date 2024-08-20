@@ -11,6 +11,7 @@ public class SpawnOnCallback : MonoBehaviour
     private void OnDestroy()
     {
         Spawn(onDestroy);
+        if (SoundManager.instance != null) SoundManager.instance.PlaySoundOnce("Explosion");
     }
 
     private void Start()

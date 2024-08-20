@@ -575,6 +575,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &389673628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 389673630}
+  - component: {fileID: 389673629}
+  - component: {fileID: 389673631}
+  m_Layer: 0
+  m_Name: TestAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &389673629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389673628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76e613e57e4d3494d8a62f774c99edbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicList: {fileID: 0}
+  soundList: {fileID: 11400000, guid: 74e1be19a839ccf40853722b603ea713, type: 2}
+  mainMixer: {fileID: 24100000, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
+--- !u!4 &389673630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389673628}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &389673631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389673628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6380a47b11ddd745b32ead42fc25ebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &453262988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,6 +1349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1257939042}
+  - component: {fileID: 1257939045}
   - component: {fileID: 1257939043}
   - component: {fileID: 1257939044}
   m_Layer: 0
@@ -1336,6 +1397,8 @@ MonoBehaviour:
   slingLine: {fileID: 223575027}
   previseLine: {fileID: 220767969}
   previseReduction: 0.75
+  repairIcon: {fileID: 0}
+  spriteColorTeam: {fileID: 0}
   minForce: 1
   maxForce: 25
   minSlingDist: 0.5
@@ -1344,10 +1407,18 @@ MonoBehaviour:
   endOrientationSpeed: 0
   projectablesItem: []
   slingInput: 323
+  altSlingInput: 324
   changeItemUp: 273
   selectItemDown: 274
   rotateLeft: 276
   rotateRight: 275
+  movementSpeed: 1
+  goLeft: 113
+  goRight: 100
+  goUp: 122
+  goDown: 115
+  ItemOwner:
+    m_InternalValue: 0
 --- !u!212 &1257939044
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1400,6 +1471,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1257939045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257939037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2779440567
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1380075864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2107,3 +2199,4 @@ SceneRoots:
   - {fileID: 721882153}
   - {fileID: 1816936258}
   - {fileID: 229686464}
+  - {fileID: 389673630}

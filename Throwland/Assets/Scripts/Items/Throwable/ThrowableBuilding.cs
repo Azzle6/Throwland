@@ -15,6 +15,7 @@ namespace Items.Throwable
             if(Physics2D.OverlapPoint(transform.position,terrainMask) == null) return;
 
             GlobalManager.Instance.RequestSpawnBuildingServerRpc(this.BuildingToPlace.ID, transform.position, this.Owner.Value);
+            if (SoundManager.instance != null) SoundManager.instance.PlaySoundOnce("BuildCity");
         }
 
         public override void OnCollide(Collider2D collider)
@@ -24,6 +25,7 @@ namespace Items.Throwable
             {
                 city.ChangeHpServerRpc(city.HP.Value + 10);
                 this.DeleteItemServerRpc();
+                if (SoundManager.instance != null) SoundManager.instance.PlaySoundOnce("GrowCity");
                 return;
             }
         }

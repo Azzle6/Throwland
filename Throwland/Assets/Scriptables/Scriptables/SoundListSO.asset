@@ -12,5 +12,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a89e435888a57940a03ce66cc9fe3f5, type: 3}
   m_Name: SoundListSO
   m_EditorClassIdentifier: 
-  sounds: []
-  soundS: []
+  sounds:
+  - clipName: DestroyCity
+    clip: {fileID: 8300000, guid: fb7870b5ca3bfbc4595c6002cbb4650d, type: 3}
+    audioMixerGroup: {fileID: -1632135409984328915, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
+    loop: 0
+    clipVolume: 1
+    minPitch: -0.1
+    maxPitch: 0.1
+  - clipName: BuildCity
+    clip: {fileID: 8300000, guid: f941e77235adfef40ba4165452da5a3e, type: 3}
+    audioMixerGroup: {fileID: -1632135409984328915, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
+    loop: 0
+    clipVolume: 1
+    minPitch: -0.1
+    maxPitch: 0.1
+  - clipName: GrowCity
+    clip: {fileID: 8300000, guid: 4cafbe56d7635bf43ab965c0fd5e0e74, type: 3}
+    audioMixerGroup: {fileID: -1632135409984328915, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
+    loop: 0
+    clipVolume: 1
+    minPitch: -0.1
+    maxPitch: 0.1
+  - clipName: HitCity
+    clip: {fileID: 8300000, guid: 5b46d9e58000bd34bb5f632fd4fd854d, type: 3}
+    audioMixerGroup: {fileID: -1632135409984328915, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
+    loop: 0
+    clipVolume: 1
+    minPitch: -0.1
+    maxPitch: 0.1
+  - clipName: RopeCreakLoop
+    clip: {fileID: 8300000, guid: 80d21110d6eea7642a973ea84380ef2a, type: 3}
+    audioMixerGroup: {fileID: -1632135409984328915, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
+    loop: 1
+    clipVolume: 1
+    minPitch: -0.1
+    maxPitch: 0.1
+  - clipName: RopeCreakLoop
+    clip: {fileID: 8300000, guid: 80d21110d6eea7642a973ea84380ef2a, type: 3}
+    audioMixerGroup: {fileID: -1632135409984328915, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
+    loop: 1
+    clipVolume: 1
+    minPitch: -0.1
+    maxPitch: 0.1
+  - clipName: ShootSlam
+    clip: {fileID: 8300000, guid: 31e4233c4aed8af478827f07a1304fc4, type: 3}
+    audioMixerGroup: {fileID: -1632135409984328915, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
+    loop: 0
+    clipVolume: 1
+    minPitch: -0.1
+    maxPitch: 0.1
+  - clipName: Explosion
+    clip: {fileID: 8300000, guid: acd2c1294378a3d41b61b671b4c89987, type: 3}
+    audioMixerGroup: {fileID: -1632135409984328915, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
+    loop: 0
+    clipVolume: 1
+    minPitch: -0.1
+    maxPitch: 0.1
+  soundS:
+  - {fileID: 0}
