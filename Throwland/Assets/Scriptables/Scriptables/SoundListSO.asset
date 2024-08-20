@@ -66,7 +66,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: acd2c1294378a3d41b61b671b4c89987, type: 3}
     audioMixerGroup: {fileID: -1632135409984328915, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
     loop: 0
-    clipVolume: 1
+    clipVolume: 0.514
+    minPitch: -0.1
+    maxPitch: 0.1
+  - clipName: Fire
+    clip: {fileID: 8300000, guid: c774b398afbdf5b4b8feb41216246cd1, type: 3}
+    audioMixerGroup: {fileID: -1632135409984328915, guid: 4d6def3a2307c9343a2fdd5deacb4e79, type: 2}
+    loop: 0
+    clipVolume: 0.466
     minPitch: -0.1
     maxPitch: 0.1
   soundS:
