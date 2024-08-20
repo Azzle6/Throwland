@@ -7,6 +7,7 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.Serialization;
 using System;
+using Unity.Netcode.Components;
 
 public class Slinger : NetworkBehaviour
 {
@@ -59,6 +60,8 @@ public class Slinger : NetworkBehaviour
     [BoxGroup("Movement")]
     [SerializeField] private KeyCode goDown = KeyCode.S;
 
+    Rigidbody2D rb;
+
     private NetworkVariable<bool> isStun = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone);
     public NetworkVariable<E_ItemOwner> ItemOwner = new NetworkVariable<E_ItemOwner>(E_ItemOwner.PLAYER_1, NetworkVariableReadPermission.Everyone);
     private Coroutine currentStunCoroutine;
@@ -66,7 +69,12 @@ public class Slinger : NetworkBehaviour
     private bool canSlingInput = true;
 
     Camera mainCamera;
-    
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     public override void OnNetworkSpawn()
     {
         this.startSlingSprite.gameObject.SetActive(IsOwner);
@@ -124,17 +132,35 @@ public class Slinger : NetworkBehaviour
     {
         mainCamera = Camera.main;
     }
-    
+
+    Vector3 prevPos;
+    Vector3 currPos;
+
     void Update()
     {
+        RotateSprite();
+
         if (!IsOwner)
             return;
-        
+
         UpdateSlingParameter();
         PerformInputs();
         UpdateSlingVisual();
+
     }
-    
+
+    private void RotateSprite()
+    {
+        prevPos = currPos;
+        currPos = transform.position;
+
+        Vector3 vel = currPos - prevPos;
+        if (vel.x == 0) return;
+
+        float targetAngle = vel.x < 0f ? 180f : 0;
+        lastStartSlingSprite.transform.eulerAngles = new Vector3(0, targetAngle, 0);
+    }
+
     void UpdateSlingParameter()
     {
         // Get Mouse Position
@@ -151,8 +177,8 @@ public class Slinger : NetworkBehaviour
         moveDirection.x = horiz * this.movementSpeed;
         moveDirection.y = verti * this.movementSpeed;
         moveDirection = Vector3.ClampMagnitude(moveDirection, this.movementSpeed);
-        this.transform.position += moveDirection * (Time.deltaTime * (this.isStun.Value ? 0.8f : 1));
-        this.launchPosition = this.transform.position;
+        rb.velocity = moveDirection * (this.isStun.Value ? 0.8f : 1);
+        this.launchPosition = this.rb.position;
         
         /*launchPosition = startSlingPosition;
         launchPosition.x = transform.position.x;

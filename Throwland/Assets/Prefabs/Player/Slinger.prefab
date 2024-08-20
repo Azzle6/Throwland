@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3589148129857976519}
   - component: {fileID: 6458313557375043979}
   - component: {fileID: 8748497994768141433}
+  - component: {fileID: 4791085880644122507}
+  - component: {fileID: 3605046694435628699}
   m_Layer: 8
   m_Name: Slinger
   m_TagString: Untagged
@@ -188,9 +190,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.80575216}
+  m_Offset: {x: 0, y: 0.67}
   serializedVersion: 2
-  m_Radius: 1.3456618
+  m_Radius: 0.8
 --- !u!114 &8748497994768141433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +224,45 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!50 &4791085880644122507
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676265705278856555}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &3605046694435628699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676265705278856555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1709410081557071591
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,8 +369,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.97075593, b: 0.41037738, a: 1}
-      key1: {r: 1, g: 0.3066038, b: 0.3066038, a: 1}
+      key0: {r: 0.15566039, g: 1, b: 0.9643859, a: 1}
+      key1: {r: 0.2215317, g: 1, b: 0.21226418, a: 1}
       key2: {r: 1, g: 0.30588233, b: 0.48637792, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -337,7 +378,7 @@ LineRenderer:
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 48959
+      ctime1: 65535
       ctime2: 65535
       ctime3: 0
       ctime4: 0
@@ -345,16 +386,16 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 52814
+      atime1: 48188
       atime2: 65535
       atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 2
+      m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 3
+      m_NumColorKeys: 2
       m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1668547243003732036}
   - component: {fileID: -4560406098185158456}
   - component: {fileID: -3371280034510294245}
+  - component: {fileID: 311060854094580010}
   m_Layer: 0
   m_Name: ThrowableCity
   m_TagString: Untagged
@@ -127,7 +128,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2a31717b712a98c46b5deec8a218b019, type: 3}
-  m_Color: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
+  m_Color: {r: 1, g: 0.9026753, b: 0.3160377, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -168,3 +169,19 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &311060854094580010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630902707383446515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a745d81986f45a148ae718d4a2123f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamIndex: 0
+  colors:
+  - {r: 0.082352914, g: 0.8509804, b: 0.76502424, a: 1}
+  - {r: 0.8980393, g: 0.50980395, b: 0.33333334, a: 1}

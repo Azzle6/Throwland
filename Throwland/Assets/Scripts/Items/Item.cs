@@ -26,7 +26,24 @@ namespace Items
         {
             Owner.Value = owner;
         }
-        
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+            Owner.OnValueChanged += OnOwnerValueChanged;
+            OnOwnerValueChanged(Owner.Value, Owner.Value);
+        }
+
+        private void OnOwnerValueChanged(E_ItemOwner previousValue, E_ItemOwner newValue)
+        {
+            TeamColoredVisual[] visuals = GetComponentsInChildren<TeamColoredVisual>(true);
+
+            foreach (var visual in visuals)
+            {
+                visual.SetTeam((int)newValue);
+            }
+        }
+
         //[ServerRpc(RequireOwnership = false)]
         //public void ChangePositionServerRpc(Vector3 pos)
         //{
